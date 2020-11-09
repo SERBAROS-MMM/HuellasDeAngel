@@ -1,0 +1,25 @@
+{
+  "name": "huellas_de_angel_app",
+  "homepage": "https://github.com/SergioBtosO/huellas_de_angel_app.git",
+  "authors": [
+    "SERBAROS MMM"
+  ],
+  "description": "App para la gestion de la fundacion Huellas de Angel",
+  "main": "dist/index.js",
+  "keywords": [
+    "material",
+    "design",
+    "material-ui",
+    "google",
+    "twitter"
+  ],
+  "license": "SERBAROS MMM License",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "private": true
+}
