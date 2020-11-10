@@ -108,6 +108,7 @@ const LoginPage = (props) =>{
         <Footer whiteFont />
       </div>
     </div>
+    
   );
 }
 
