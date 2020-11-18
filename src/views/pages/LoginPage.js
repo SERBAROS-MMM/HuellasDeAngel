@@ -23,7 +23,7 @@ import NotificacionLogin from "components/huellas/NotificacionLogin.js";
 
 const useStyles = makeStyles(styles);
 
-const LoginPage = (props) =>{
+const LoginPage = () =>{
 
 const [notificacion, setNotificacion] = useState(false);
   
