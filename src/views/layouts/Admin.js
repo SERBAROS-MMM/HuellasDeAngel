@@ -23,6 +23,7 @@ const switchRoutes = (
   <Switch>
     {routes.map((prop, key) => {
       if (prop.layout === "/admin") {
+
         return (
           <Route
             path={prop.layout + prop.path}
@@ -81,7 +82,7 @@ export default function Admin({ ...rest }) {
   return (
     <div className={classes.wrapper}>
       <Sidebar
-        routes={routes}
+        routes={routes.filter(route => route.layout === "/admin")}
         logoText={"Huellas de Ángel"}
         logo={logo}
         image={bgImage}

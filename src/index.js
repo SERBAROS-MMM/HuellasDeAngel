@@ -9,7 +9,6 @@ import "assets/scss/material-kit-react.scss?v=1.9.0";
 import Admin from "views/layouts/Admin"
 import Auth from "views/layouts/Auth"
 // pages for this product
-import LoginPage from "views/pages/LoginPage.js";
 
 var hist = createBrowserHistory();
 
