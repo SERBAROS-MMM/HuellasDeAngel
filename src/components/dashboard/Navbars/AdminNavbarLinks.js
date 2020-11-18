@@ -46,7 +46,7 @@ export default function AdminNavbarLinks() {
     }
   };
   const handleCloseProfile = () => {
-    window.location.href = '/login'
+    window.location.href = '/auth/login'
   };
   return (
     <div>
