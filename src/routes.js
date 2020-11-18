@@ -31,7 +31,7 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/",
+    path: "/login",
     name: "Login",
     icon: Dashboard,
     component: LoginPage,
