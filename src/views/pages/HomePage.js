@@ -1,25 +1,20 @@
-import React from "react";
+import React,{useState} from "react";
 import Button from "components/dashboard/CustomButtons/Button.js";
-  
+import Badge from "components/kit/Badge/Badge.js"
+import Indicadores from "components/huellas/Indicadores.js"
+import CardBoy from "components/huellas/CardBoy.js"
+import Buscar from "components/huellas/Buscar.js"
 
 const HomePage = (props) => {
-
-    if(props.active)
-    {
-        window.location.href = '/login'
-    }
-
-    const cerrarSesion = (e) =>{
-        window.location.href = '/login'
-    }
-
   return (
     <div>
-      <Button variant="text" color="primary" onClick={cerrarSesion}>
-        CerrarSesion
-      </Button>
+      <div>
+        <Indicadores/>
+        <Buscar/>
+      </div>
     </div>
-  );
+    
+      );
 };
 
 export default HomePage;
