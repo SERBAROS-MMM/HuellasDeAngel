@@ -5,7 +5,7 @@ import Indicadores from "components/huellas/Indicadores.js"
 import CardBoy from "components/huellas/CardBoy.js"
 import Buscar from "components/huellas/Buscar.js"
 
-const HomePage = (props) => {
+const HomePage = () => {
   return (
     <div>
       <div>
