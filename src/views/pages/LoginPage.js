@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -13,17 +13,20 @@ import Button from "components/kit/CustomButtons/Button.js";
 import Card from "components/kit/Card/Card.js";
 import CardBody from "components/kit/Card/CardBody.js";
 import CardHeader from "components/kit/Card/CardHeader.js";
-import CardFooter from "components/kit/Card/CardFooter.js";
 import CustomInput from "components/kit/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import imageFondo from "assets/img/bgblocks2.jpg";
 
+import NotificacionLogin from "components/huellas/NotificacionLogin.js";
+
 const useStyles = makeStyles(styles);
 
 const LoginPage = (props) =>{
 
+const [notificacion, setNotificacion] = useState(false);
+  
   const loginHandler = (e) => {
     e.preventDefault();
     
@@ -32,7 +35,8 @@ const LoginPage = (props) =>{
     }else{
       e.target.elements.namedItem("email").value='' 
       e.target.elements.namedItem("pass").value =''
-    };
+      setNotificacion(true)
+      };
   }
   
 
@@ -95,20 +99,24 @@ const LoginPage = (props) =>{
                       }}
                     />
                   </CardBody>
-                  <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg" type="submit" >
-                      Entrar
-                    </Button>
-                  </CardFooter>
+                  <Card plain>
+                  <CardHeader className={classes.cardHeader}> 
+                      <Button round color="primary" size="lg" type="submit">
+                        Entrar
+                      </Button>
+                  </CardHeader>
+                      {notificacion &&                       
+                        <NotificacionLogin/>
+                      }          
+                  </Card>
                 </form>
               </Card>
             </GridItem>
           </GridContainer>
-        </div>
+        </div>        
         <Footer whiteFont />
       </div>
-    </div>
-    
+    </div>    
   );
 }
 
