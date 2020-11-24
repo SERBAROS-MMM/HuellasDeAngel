@@ -83,7 +83,7 @@ export default function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes.filter(route => route.layout === "/admin")}
-        logoText={"Huellas de Ángel"}
+        logoText={"Huellas de angel"}
         logo={logo}
         image={bgImage}
         handleDrawerToggle={handleDrawerToggle}
