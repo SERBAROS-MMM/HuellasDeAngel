@@ -55,7 +55,7 @@ function Buscar(props) {
             <Grid item xs>
               <TextField
                 fullWidth
-                placeholder="Search by email address, phone number, or user UID"
+                placeholder="Buscar por nombre, identificación, comisaría..."
                 InputProps={{
                   disableUnderline: true,
                   className: classes.searchInput,
@@ -64,7 +64,7 @@ function Buscar(props) {
             </Grid>
             <Grid item>
               <Button variant="contained" color="primary" className={classes.addUser}>
-                Add user
+                Agregar
               </Button>
               <Tooltip title="Reload">
                 <IconButton>

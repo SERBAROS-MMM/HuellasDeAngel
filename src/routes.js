@@ -25,7 +25,7 @@ import LoginPage from "views/pages/LoginPage.js";
 const dashboardRoutes = [
   {
     path: "/",
-    name: "Home",
+    name: "INICIO",
     icon: Dashboard,
     component: HomePage,
     layout: "/admin"
