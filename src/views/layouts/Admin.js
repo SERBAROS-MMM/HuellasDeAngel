@@ -6,7 +6,7 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import Navbar from "components/dashboard/Navbars/Navbar.js";
+import Navbar from "components/huellas/NavbarPrincipal.js";
 import Footer from "components/dashboard/Footer/Footer.js";
 import Sidebar from "components/dashboard/Sidebar/Sidebar.js";
 
@@ -83,7 +83,7 @@ export default function Admin({ ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes.filter(route => route.layout === "/admin")}
-        logoText={"Huellas de Ángel"}
+        logoText={"Huellas de angel"}
         logo={logo}
         image={bgImage}
         handleDrawerToggle={handleDrawerToggle}
