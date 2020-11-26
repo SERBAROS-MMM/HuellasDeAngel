@@ -1,6 +1,5 @@
 import React from "react";
 // react plugin for creating charts
-import ChartistGraph from "react-chartist";
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
@@ -10,44 +9,40 @@ import Warning from "@material-ui/icons/Warning";
 import DateRange from "@material-ui/icons/DateRange";
 import LocalOffer from "@material-ui/icons/LocalOffer";
 import Update from "@material-ui/icons/Update";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import AccessTime from "@material-ui/icons/AccessTime";
 import Accessibility from "@material-ui/icons/Accessibility";
-import BugReport from "@material-ui/icons/BugReport";
-import Code from "@material-ui/icons/Code";
-import Cloud from "@material-ui/icons/Cloud";
+
 // core components
 import GridItem from "components/dashboard/Grid/GridItem.js";
-import GridContainer from "components/dashboard/Grid/GridContainer.js";
-import Table from "components/dashboard/Table/Table.js";
-import Tasks from "components/dashboard/Tasks/Tasks.js";
-import CustomTabs from "components/dashboard/CustomTabs/CustomTabs.js";
 import Danger from "components/dashboard/Typography/Danger.js";
 import Card from "components/dashboard/Card/Card.js";
 import CardHeader from "components/dashboard/Card/CardHeader.js";
 import CardIcon from "components/dashboard/Card/CardIcon.js";
-import CardBody from "components/dashboard/Card/CardBody.js";
 import CardFooter from "components/dashboard/Card/CardFooter.js";
-
-import { bugs, website, server } from "variables/general.js";
-
-import {
-  dailySalesChart,
-  emailsSubscriptionChart,
-  completedTasksChart
-} from "variables/charts.js";
-
+import Box from '@material-ui/core/Box';
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import GridContainer from "components/dashboard/Grid/GridContainer";
+import { GridList } from "@material-ui/core";
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles({
+  root: {
+    width: '500px',
+    height: '200px',
+    overflow: 'hidden',
+    overflowx: 'scroll'
+  },
+  item: {
+    display:'table-cell'
+  },
+  ...styles});
 
-export default function Dashboard() {
+export default function PruebaScroll() {
+
+
   const classes = useStyles();
   return (
-    <div>
-      <GridContainer>
-        <GridItem xs={12} sm={6} md={3}>
-          <Card>
+    <Box className={classes.root} >
+       <Box className={classes.item} xs={12} sm={6} md={3}>
+          <Card xs={12} sm={6} md={3} >
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
                 <Icon>content_copy</Icon>
@@ -68,9 +63,9 @@ export default function Dashboard() {
               </div>
             </CardFooter>
           </Card>
-        </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
-          <Card>
+          </Box>
+          <div className={classes.item}>
+          <Card xs={12} sm={6} md={3} >
             <CardHeader color="success" stats icon>
               <CardIcon color="success">
                 <Store />
@@ -85,7 +80,7 @@ export default function Dashboard() {
               </div>
             </CardFooter>
           </Card>
-        </GridItem>
+          </div>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="danger" stats icon>
@@ -120,8 +115,75 @@ export default function Dashboard() {
             </CardFooter>
           </Card>
         </GridItem>
-      </GridContainer>
-    </div>
-
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="warning" stats icon>
+              <CardIcon color="warning">
+                <Icon>content_copy</Icon>
+              </CardIcon>
+              <p className={classes.cardCategory}>Used Space</p>
+              <h3 className={classes.cardTitle}>
+                49/50 <small>GB</small>
+              </h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <Danger>
+                  <Warning />
+                </Danger>
+                <a href="#pablo" onClick={e => e.preventDefault()}>
+                  Get more space
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="warning" stats icon>
+              <CardIcon color="warning">
+                <Icon>content_copy</Icon>
+              </CardIcon>
+              <p className={classes.cardCategory}>Used Space</p>
+              <h3 className={classes.cardTitle}>
+                49/50 <small>GB</small>
+              </h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <Danger>
+                  <Warning />
+                </Danger>
+                <a href="#pablo" onClick={e => e.preventDefault()}>
+                  Get more space
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
+          <Card>
+            <CardHeader color="warning" stats icon>
+              <CardIcon color="warning">
+                <Icon>content_copy</Icon>
+              </CardIcon>
+              <p className={classes.cardCategory}>Used Space</p>
+              <h3 className={classes.cardTitle}>
+                49/50 <small>GB</small>
+              </h3>
+            </CardHeader>
+            <CardFooter stats>
+              <div className={classes.stats}>
+                <Danger>
+                  <Warning />
+                </Danger>
+                <a href="#pablo" onClick={e => e.preventDefault()}>
+                  Get more space
+                </a>
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+    </Box>
   );
 }
