@@ -5,21 +5,35 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import avatar from "assets/img/faces/marc.jpg";
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ModifyIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    margin: '5px 0px'
+    margin: '5px 0px',
+    justifyContent: 'space-around',
   },
   details: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
   },
   content: {
     flex: '1 0 auto',
   },
   cover: {
     width: 151,
+  },
+  body: {
+    width: 151,
+  },
+  button: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
   },
 }));
 
@@ -34,19 +48,46 @@ const CardBoy=({name,lastname,age,image})=> {
         image={image}
         title="Live from space album cover"
       />
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            {name}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            {lastname}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            {age}
-          </Typography>
-        </CardContent>
-      </div>
+    <CardContent className={classes.content}>
+      <Typography component="h5" variant="h5">
+        {name} {lastname}
+      </Typography>
+      <Typography variant="subtitle1" color="textSecondary">
+        Comisaría 1
+      </Typography>
+      <Typography variant="subtitle1" color="textSecondary">
+        {age} años
+      </Typography>
+    </CardContent>
+
+    <CardContent className={classes.content}>
+      <Typography component="h5" variant="h5">
+        Resumen
+      </Typography>
+      <Typography variant="body1" color="textSecondary" gutterBottom>
+        <div className={classes.body}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur.
+        </div>
+      </Typography>
+    </CardContent>
+
+    <CardContent className={classes.content}>   
+    <div className={classes.body}>
+      <IconButton aria-label="search">
+        <SearchIcon /> <h5> Ver detalles</h5>
+      </IconButton>
+
+      <IconButton aria-label="modify">
+        <ModifyIcon /> <h5> Modificar</h5>
+      </IconButton>
+
+      <IconButton aria-label="delete">
+        <DeleteIcon /> <h5> Eliminar</h5>
+      </IconButton>
+
+      
+    </div>
+    </CardContent>
       
     </Card>
   );
