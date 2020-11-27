@@ -3,19 +3,19 @@
 export const BOYS = [
     {
         name:'juanito',
-        lastname:'perez',
+        lastName1:'perez',
         age:'10',
         image:'https://thispersondoesnotexist.com/image',
     },
     {
         name:'juanita',
-        lastname:'pereza',
+        lastName1:'pereza',
         age:'15',
         image:'https://thispersondoesnotexist.com/image',
     },
     {
         name:'goku',
-        lastname:'biden',
+        lastName1:'biden',
         age:'17',
         image:'https://thispersondoesnotexist.com/image',
     },

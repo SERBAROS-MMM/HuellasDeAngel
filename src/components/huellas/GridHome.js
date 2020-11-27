@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import GridItem from 'components/dashboard/Grid/GridItem';
 import {BOYS} from '../../data/example.js'
+import {HTTP_CONSTANTS} from './../../config/http-constants'
+import {requestHttp} from './../../config/http-server'
 
 const styles = (theme) => ({
     contentWrapper: {
@@ -23,8 +25,15 @@ const [persons, setPersons] = useState([])
 
 const [existPersons, setExistPersons] = useState(false)
 
-const getPersons=()=>{
-    setPersons(BOYS)    
+const getPersons=async()=>{
+    try {
+      const endpoint=HTTP_CONSTANTS.persons
+      const response=await requestHttp('get',endpoint)
+      setPersons(response)
+    } catch (error) {
+      console.error('error.getPersons:',error)
+      setPersons(BOYS)
+    }
 }
 
 useEffect(() => {
@@ -48,7 +57,7 @@ return (
               
                 <GridItem key={key}>
 
-                    <CardBoy name={item.name} lastname={item.lastname} age={item.age} image={item.image}/>
+                    <CardBoy name={item.name} lastname={item.lastName1} age={item.age} image='https://thispersondoesnotexist.com/image'/>
 
                 </GridItem>
                 )
