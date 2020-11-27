@@ -32,6 +32,7 @@ const getPersons=async()=>{
       setPersons(response)
     } catch (error) {
       console.error('error.getPersons:',error)
+      setPersons(BOYS)
     }
 }
 
