@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import Button from "components/dashboard/CustomButtons/Button.js";
 import Badge from "components/kit/Badge/Badge.js"
 import Indicadores from "components/huellas/Indicadores.js"
+import PruebaScroll from "components/huellas/PruebaScroll.js"
 import CardBoy from "components/huellas/CardBoy.js"
 import Buscar from "components/huellas/Buscar.js"
 
