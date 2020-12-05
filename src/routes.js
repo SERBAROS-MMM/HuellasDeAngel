@@ -29,15 +29,31 @@ const dashboardRoutes = [
     name: "INICIO",
     icon: Dashboard,
     component: HomePage,
+    navbar: false,
+    layout: "/admin"
+  },
+  {
+    path: "/usuario",
+    name: "Usuario",
+    icon: Dashboard,
+    component: UserPage,
+    navbar: false,
+    layout: "/admin"
+  },
+  {
+    path: "/Reportes",
+    name: "Reportes",
+    icon: Dashboard,
+    component: UserPage,
     navbar: true,
     layout: "/admin"
   },
   {
-    path: "/user",
-    name: "USER",
+    path: "/novedades",
+    name: "Novedades",
     icon: Dashboard,
     component: UserPage,
-    navbar: false,
+    navbar: true,
     layout: "/admin"
   },
   {

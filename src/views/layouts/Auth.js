@@ -4,12 +4,12 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+//import { makeStyles } from "@material-ui/core/styles";
 // core components
 
 import routes from "routes.js";
 
-import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
+//import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 let ps;
 
@@ -31,20 +31,20 @@ const switchRoutes = (
   </Switch>
 );
 
-const useStyles = makeStyles(styles);
+//const useStyles = makeStyles(styles);
 
 export default function Auth({ ...rest }) {
   // styles
-  const classes = useStyles();
+  //const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef();
   // states and functions
-  const color = "blue";
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  //const color = "blue";
+  //const [mobileOpen, setMobileOpen] = React.useState(false);
  
   const resizeFunction = () => {
     if (window.innerWidth >= 960) {
-      setMobileOpen(false);
+    //  setMobileOpen(false);
     }
   };
   // initialize and destroy the PerfectScrollbar plugin

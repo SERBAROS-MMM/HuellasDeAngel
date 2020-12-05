@@ -47,7 +47,7 @@ export default function NavbarLinks() {
   };
 
   const handleShowPerfil = () => {
-    window.location.href = '/admin/user'
+    window.location.href = '/admin/usuario'
   };
 
   return (
