@@ -7,7 +7,7 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Navbar from "components/huellas/NavbarPrincipal.js";
-import Footer from "components/dashboard/Footer/Footer.js";
+
 import Sidebar from "components/dashboard/Sidebar/Sidebar.js";
 
 import routes from "routes.js";
@@ -98,7 +98,6 @@ export default function Admin({ ...rest }) {
           <div className={classes.content}>
             <div className={classes.container}>{switchRoutes}</div>
           </div>
-         <Footer />
       </div>
     </div>
   );

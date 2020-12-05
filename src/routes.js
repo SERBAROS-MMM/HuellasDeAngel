@@ -57,6 +57,14 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
+    path: "/configuracion",
+    name: "Configuracion",
+    icon: Dashboard,
+    component: UserPage,
+    navbar: false,
+    layout: "/admin"
+  },
+  {
     path: "/login",
     name: "Login",
     icon: Dashboard,

@@ -30,9 +30,21 @@ export default function AdminNavbarLinks() {
       setOpenProfile(event.currentTarget)
     }
   }
-  const handleCloseProfile = () => {
+  
+  const handleClickAway = event => {
+  };
+
+  const handleClickSettings = event => {
+    window.location.href = '/admin/configuracion'
+  };
+
+  const handleCloseSession = () => {
     window.location.href = '/auth/login'
-  }
+  };
+
+  const handleShowPerfil = () => {
+    window.location.href = '/admin/usuario'
+  };
   return (
     <div>
       <div className={classes.manager}>
@@ -47,7 +59,7 @@ export default function AdminNavbarLinks() {
         >
           <Person className={classes.icons} />
           <Hidden mdUp implementation="css">
-            <p className={classes.linkText}>Profile</p>
+            <p className={classes.linkText}>Perfil</p>
           </Hidden>
         </Button>
         <Poppers
@@ -71,26 +83,26 @@ export default function AdminNavbarLinks() {
               }}
             >
               <Paper>
-                <ClickAwayListener onClickAway={handleCloseProfile}>
+                <ClickAwayListener onClickAway={handleClickAway}>
                   <MenuList role="menu">
                     <MenuItem
-                      onClick={handleClickProfile}
+                      onClick={handleShowPerfil}
                       className={classes.dropdownItem}
                     >
-                      Profile
+                      Perfil
                     </MenuItem>
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={handleClickSettings}
                       className={classes.dropdownItem}
                     >
-                      Settings
+                      Configuración
                     </MenuItem>
                     <Divider light />
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={handleCloseSession}
                       className={classes.dropdownItem}
                     >
-                      Logout
+                      Cerrar Sesión
                     </MenuItem>
                   </MenuList>
                 </ClickAwayListener>

@@ -27,6 +27,7 @@ export default function NavbarLinks() {
   const [openProfile, setOpenProfile] = React.useState(null)
   
   const handleClickSettings = event => {
+    window.location.href = '/admin/configuracion'
   };
 
   const handleClickAway = event => {

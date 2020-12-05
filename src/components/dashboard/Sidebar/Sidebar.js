@@ -13,9 +13,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
 // core components
 import AdminNavbarLinks from "components/dashboard/Navbars/AdminNavbarLinks.js";
-import RTLNavbarLinks from "components/dashboard/Navbars/RTLNavbarLinks.js";
+
 
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
+
 
 const useStyles = makeStyles(styles);
 
@@ -109,12 +110,10 @@ export default function Sidebar(props) {
       <Hidden mdUp implementation="css">
         <Drawer
           variant="temporary"
-          anchor={props.rtlActive ? "left" : "right"}
+          anchor={ "right"}
           open={props.open}
           classes={{
-            paper: classNames(classes.drawerPaper, {
-              [classes.drawerPaperRTL]: props.rtlActive
-            })
+            paper: classNames(classes.drawerPaper)
           }}
           onClose={props.handleDrawerToggle}
           ModalProps={{
@@ -123,7 +122,7 @@ export default function Sidebar(props) {
         >
           {brand}
           <div className={classes.sidebarWrapper}>
-            {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
+            <AdminNavbarLinks />
             {links}
           </div>
           {image !== undefined ? (
@@ -136,17 +135,16 @@ export default function Sidebar(props) {
       </Hidden>
       <Hidden smDown implementation="css">
         <Drawer
-          anchor={props.rtlActive ? "right" : "left"}
+          anchor={"left"}
           variant="permanent"
           open
           classes={{
-            paper: classNames(classes.drawerPaper, {
-              [classes.drawerPaperRTL]: props.rtlActive
-            })
+            paper: classNames(classes.drawerPaper)
           }}
         >
           {brand}
           <div className={classes.sidebarWrapper}>{links}</div>
+         
           {image !== undefined ? (
             <div
               className={classes.background}
@@ -156,6 +154,7 @@ export default function Sidebar(props) {
         </Drawer>
       </Hidden>
     </div>
+    
   );
 }
 
