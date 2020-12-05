@@ -21,13 +21,23 @@ import Dashboard from "@material-ui/icons/Dashboard";
 // core components/views for Admin layout
 import HomePage from "views/pages/HomePage.js";
 import LoginPage from "views/pages/LoginPage.js";
+import UserPage from "views/pages/UserPage.js";
 
 const dashboardRoutes = [
   {
-    path: "/",
+    path: "/inicio",
     name: "INICIO",
     icon: Dashboard,
     component: HomePage,
+    navbar: true,
+    layout: "/admin"
+  },
+  {
+    path: "/user",
+    name: "USER",
+    icon: Dashboard,
+    component: UserPage,
+    navbar: false,
     layout: "/admin"
   },
   {
@@ -35,6 +45,7 @@ const dashboardRoutes = [
     name: "Login",
     icon: Dashboard,
     component: LoginPage,
+    navbar: false,
     layout: "/auth"
   },
  

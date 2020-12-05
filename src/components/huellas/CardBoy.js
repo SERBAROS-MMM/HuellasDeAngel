@@ -64,9 +64,9 @@ const CardBoy=({name,lastname,age,image})=> {
       <Typography component="h5" variant="h5">
         Resumen
       </Typography>
-      <Typography variant="body1" color="textSecondary" gutterBottom>
+      <Typography variant="body1" color="textSecondary" component={'div'} gutterBottom>
         <div className={classes.body}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur.
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur.
         </div>
       </Typography>
     </CardContent>

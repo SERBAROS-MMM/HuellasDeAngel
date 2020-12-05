@@ -18,12 +18,12 @@ import bgImage from "assets/img/bgblocks.jpg";
 import logo from "assets/img/logoHuellas.png";
 
 let ps;
-
 const switchRoutes = (
   <Switch>
-    {routes.map((prop, key) => {
+    {
+    routes.map((prop, key) => {
       if (prop.layout === "/admin") {
-
+        
         return (
           <Route
             path={prop.layout + prop.path}
@@ -34,7 +34,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/admin" to="/admin/" />
+    <Redirect from="/" to="/admin/inicio" />
   </Switch>
 );
 
@@ -49,13 +49,13 @@ export default function Admin({ ...rest }) {
   const color = "blue";
   const [mobileOpen, setMobileOpen] = React.useState(false);
  
- 
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const getRoute = () => {
+  /*const getRoute = () => {
     return window.location.pathname !== "/admin/maps";
-  };
+  };*/
   const resizeFunction = () => {
     if (window.innerWidth >= 960) {
       setMobileOpen(false);
@@ -82,7 +82,7 @@ export default function Admin({ ...rest }) {
   return (
     <div className={classes.wrapper}>
       <Sidebar
-        routes={routes.filter(route => route.layout === "/admin")}
+        routes={routes.filter(route => (route.navbar)) }
         logoText={"Huellas de angel"}
         logo={logo}
         image={bgImage}
@@ -98,14 +98,10 @@ export default function Admin({ ...rest }) {
           {...rest}
         />
         {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-        {getRoute() ? (
           <div className={classes.content}>
             <div className={classes.container}>{switchRoutes}</div>
           </div>
-        ) : (
-          <div className={classes.map}>{switchRoutes}</div>
-        )}
-        {getRoute() ? <Footer /> : null}
+         <Footer />
       </div>
     </div>
   );

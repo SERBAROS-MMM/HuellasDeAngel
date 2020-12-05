@@ -6,16 +6,10 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import Navbar from "components/dashboard/Navbars/Navbar.js";
-import Footer from "components/dashboard/Footer/Footer.js";
-import Sidebar from "components/dashboard/Sidebar/Sidebar.js";
 
 import routes from "routes.js";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
-
-import bgImage from "assets/img/bgblocks.jpg";
-import logo from "assets/img/reactlogo.png";
 
 let ps;
 
@@ -48,13 +42,6 @@ export default function Auth({ ...rest }) {
   const color = "blue";
   const [mobileOpen, setMobileOpen] = React.useState(false);
  
- 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-  const getRoute = () => {
-    return window.location.pathname !== "/admin/maps";
-  };
   const resizeFunction = () => {
     if (window.innerWidth >= 960) {
       setMobileOpen(false);

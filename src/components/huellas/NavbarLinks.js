@@ -1,32 +1,30 @@
-import React from "react";
-import classNames from "classnames";
+import React from "react"
+import classNames from "classnames"
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Hidden from "@material-ui/core/Hidden";
-import Poppers from "@material-ui/core/Popper";
-import Divider from "@material-ui/core/Divider";
+import { makeStyles } from "@material-ui/core/styles"
+import MenuItem from "@material-ui/core/MenuItem"
+import MenuList from "@material-ui/core/MenuList"
+import Grow from "@material-ui/core/Grow"
+import Paper from "@material-ui/core/Paper"
+import ClickAwayListener from "@material-ui/core/ClickAwayListener"
+import Hidden from "@material-ui/core/Hidden"
+import Poppers from "@material-ui/core/Popper"
+import Divider from "@material-ui/core/Divider"
 // @material-ui/icons
-import Person from "@material-ui/icons/Person";
-import Notifications from "@material-ui/icons/Notifications";
-import Dashboard from "@material-ui/icons/Dashboard";
-import Search from "@material-ui/icons/Search";
-// core components
-import CustomInput from "components/dashboard/CustomInput/CustomInput.js";
-import Button from "components/dashboard/CustomButtons/Button.js";
+import Person from "@material-ui/icons/Person"
 
-import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js";
+// core components
+
+import Button from "components/dashboard/CustomButtons/Button.js"
+
+import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js"
 
 const useStyles = makeStyles(styles);
 
 export default function NavbarLinks() {
   const classes = useStyles();
-  const [openNotification, setOpenNotification] = React.useState(null);
-  const [openProfile, setOpenProfile] = React.useState(null);
+  
+  const [openProfile, setOpenProfile] = React.useState(null)
   
   const handleClickSettings = event => {
   };
@@ -34,33 +32,41 @@ export default function NavbarLinks() {
   const handleClickAway = event => {
   };
 
-  const handleClickProfile = event => {
+  const handleClickMenuPerfil = event => {
     if (openProfile && openProfile.contains(event.target)) {
       setOpenProfile(null);
+
     } else {
       setOpenProfile(event.currentTarget);
+     
     }
   };
 
-  const handleCloseProfile = () => {
+  const handleCloseSession = () => {
     window.location.href = '/auth/login'
+  };
+
+  const handleShowPerfil = () => {
+    window.location.href = '/admin/user'
   };
 
   return (
     <div>
       <div className={classes.manager}>
+        
         <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}
           justIcon={window.innerWidth > 959}
           simple={!(window.innerWidth > 959)}
           aria-owns={openProfile ? "profile-menu-list-grow" : null}
           aria-haspopup="true"
-          onClick={handleClickProfile}
+          onClick={handleClickMenuPerfil}
           className={classes.buttonLink}
         >
+          
           <Person className={classes.icons} />
           <Hidden mdUp implementation="css">
-            <p className={classes.linkText}>Profile</p>
+            <p className={classes.linkText}>Perfil</p>
           </Hidden>
         </Button>
         <Poppers
@@ -87,7 +93,7 @@ export default function NavbarLinks() {
                 <ClickAwayListener onClickAway={handleClickAway}>
                   <MenuList role="menu">
                     <MenuItem
-                      onClick={handleClickProfile}
+                      onClick={handleShowPerfil}
                       className={classes.dropdownItem}
                     >
                       Perfil
@@ -100,7 +106,7 @@ export default function NavbarLinks() {
                     </MenuItem>
                     <Divider light />
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      onClick={handleCloseSession}
                       className={classes.dropdownItem}
                     >
                       Cerrar sesión

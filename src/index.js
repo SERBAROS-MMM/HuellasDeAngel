@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { HashRouter, Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 
 import "assets/scss/material-kit-react.scss?v=1.9.0";
 
@@ -13,14 +13,12 @@ import Auth from "views/layouts/Auth"
 var hist = createBrowserHistory();
 
 ReactDOM.render(
-  <HashRouter>
   <Router history={hist}>
     <Switch>
        <Route path="/auth" component={Auth} />
        <Route path="/admin" component={Admin} />
-       <Redirect from="/" to="/admin/" />
+       <Redirect from="/" to="/admin/inicio" />
     </Switch>
-  </Router>
-  </HashRouter>,
+  </Router>,
   document.getElementById("root")
 );

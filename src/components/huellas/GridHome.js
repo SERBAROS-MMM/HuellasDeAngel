@@ -50,7 +50,7 @@ useEffect(() => {
 
 return (
 <div className={classes.contentWrapper}>
-        <GridList className={classes.gridList} cellHeight={'auto'} cols="1">
+        <GridList className={classes.gridList} cellHeight={'auto'} cols={1}>
             {
               existPersons &&  
               persons.map((item,key)=>
