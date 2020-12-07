@@ -69,7 +69,6 @@ function Buscar(props) {
         </Toolbar>
       </AppBar>     
       <GridHome/>   
-      
     </Paper>
   );
 }

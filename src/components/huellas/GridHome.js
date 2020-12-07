@@ -7,11 +7,14 @@ import GridItem from 'components/dashboard/Grid/GridItem';
 import {BOYS} from '../../data/example.js'
 import {HTTP_CONSTANTS} from './../../config/http-constants'
 import {requestHttp} from './../../config/http-server'
+import GridPerson from './GridPerson.js';
+
 
 const styles = (theme) => ({
     contentWrapper: {
-      margin: '10px',
+      margin: '0px',
     },
+    
     gridList: {
       width: 'auto',
       height: 350,
@@ -50,16 +53,30 @@ useEffect(() => {
 
 return (
 <div className={classes.contentWrapper}>
-        <GridList className={classes.gridList} cellHeight={'auto'} cols={1}>
+             { /* <GridList className={classes.gridList} cellHeight={'auto'} cols={1}>
             {
               existPersons &&  
               persons.map((item,key)=>
               
                 <GridItem key={key}>
-
                     <CardBoy name={item.name} lastname={item.lastName1} age={item.age} image='https://thispersondoesnotexist.com/image'/>
-
                 </GridItem>
+                )
+            }            
+        </GridList>*/}
+        <GridList className={classes.gridList} cellHeight={'auto'} cols={1} >
+            {
+              existPersons &&  
+              persons.map((item,key)=>
+                    <GridPerson 
+                      key={key} 
+                      name={item.name} 
+                      lastname={item.lastName1} 
+                      age={item.age}  
+                      ident={item.ident} 
+                      typeIdent={item.typeIdent} 
+                      gender={item.gender} 
+                      image='https://thispersondoesnotexist.com/image'/>
                 )
             }            
         </GridList>

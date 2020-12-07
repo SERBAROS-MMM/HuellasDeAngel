@@ -1,39 +1,38 @@
-import React from "react";
+import React from "react"
 
 // @material-ui/core
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles"
 
 // @material-ui/icons
 
-import Update from "@material-ui/icons/Update";
+import Update from "@material-ui/icons/Update"
 
-import Accessibility from "@material-ui/icons/Accessibility";
+import Accessibility from "@material-ui/icons/Accessibility"
 
 // core components
-import GridItem from "components/dashboard/Grid/GridItem.js";
-import GridContainer from "components/dashboard/Grid/GridContainer.js";
+import GridItem from "components/dashboard/Grid/GridItem.js"
+import GridContainer from "components/dashboard/Grid/GridContainer.js"
+import Card from "components/dashboard/Card/Card.js"
+import CardHeader from "components/dashboard/Card/CardHeader.js"
+import CardIcon from "components/dashboard/Card/CardIcon.js"
+import CardFooter from "components/dashboard/Card/CardFooter.js"
 
-import Card from "components/dashboard/Card/Card.js";
-import CardHeader from "components/dashboard/Card/CardHeader.js";
-import CardIcon from "components/dashboard/Card/CardIcon.js";
-import CardFooter from "components/dashboard/Card/CardFooter.js";
+import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 
-import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+const useStyles = makeStyles(styles)
 
-const useStyles = makeStyles(styles);
-
-export default function Dashboard() {
-  const classes = useStyles();
+const Indicadores = () => {
+  const classes = useStyles()
   return (
     <div>
       <GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color="info" stats icon>
-              <CardIcon color="info">
+            <CardHeader color="primary" stats icon>
+              <CardIcon color="primary">
                 <Accessibility />
               </CardIcon>
-              <p className={classes.cardCategory}>Comisaría 1</p>
+              <p className={classes.cardCategory}>Total</p>
               <h3 className={classes.cardTitle}>10</h3>
             </CardHeader>
             <CardFooter stats>
@@ -51,7 +50,7 @@ export default function Dashboard() {
               <CardIcon color="info">
                 <Accessibility />
               </CardIcon>
-              <p className={classes.cardCategory}>Comisaría 2</p>
+              <p className={classes.cardCategory}>Comisaría 1</p>
               <h3 className={classes.cardTitle}>3</h3>
             </CardHeader>
             <CardFooter stats>
@@ -69,7 +68,7 @@ export default function Dashboard() {
               <CardIcon color="info">
                 <Accessibility />
               </CardIcon>
-              <p className={classes.cardCategory}>Comisaría 3</p>
+              <p className={classes.cardCategory}>Comisaría 2</p>
               <h3 className={classes.cardTitle}>2</h3>
             </CardHeader>
             <CardFooter stats>
@@ -87,7 +86,7 @@ export default function Dashboard() {
               <CardIcon color="info">
                 <Accessibility />
               </CardIcon>
-              <p className={classes.cardCategory}>Comisaría 4</p>
+              <p className={classes.cardCategory}>Comisaría 3</p>
               <h3 className={classes.cardTitle}>5</h3>
             </CardHeader>
             <CardFooter stats>
@@ -100,6 +99,7 @@ export default function Dashboard() {
         </GridItem>
       </GridContainer>
     </div>
-
-  );
+  )
 }
+
+export default Indicadores

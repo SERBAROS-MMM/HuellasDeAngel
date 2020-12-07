@@ -41,12 +41,14 @@ const CardBoy=({name,lastname,age,image})=> {
 
   return (
     <Card className={classes.root}>
+      
     <CardMedia
         className={classes.cover}
         image={image}
         title="Live from space album cover"
       />
-    <CardContent className={classes.content}>
+
+    <CardContent className={classes.content} >
       <Typography component="h5" variant="h5">
         {name} {lastname}
       </Typography>
@@ -69,7 +71,7 @@ const CardBoy=({name,lastname,age,image})=> {
       </Typography>
     </CardContent>
 
-    <CardContent className={classes.content}>   
+    <CardContent className={classes.content} >   
     <div className={classes.body}>
       <IconButton aria-label="search">
         <SearchIcon /> <h5> Ver detalles</h5>
@@ -82,8 +84,6 @@ const CardBoy=({name,lastname,age,image})=> {
       <IconButton aria-label="delete">
         <DeleteIcon /> <h5> Eliminar</h5>
       </IconButton>
-
-      
     </div>
     </CardContent>
       

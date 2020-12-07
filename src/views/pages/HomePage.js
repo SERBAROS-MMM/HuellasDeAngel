@@ -5,12 +5,10 @@ import Buscar from "components/huellas/Buscar.js"
 
 const HomePage = () => {
   return (
-    <div>
       <div>
         <Indicadores/>
         <Buscar/>
       </div>
-    </div>
     
       );
 };
