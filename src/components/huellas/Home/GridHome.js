@@ -27,7 +27,8 @@ return (
                     <GridPerson 
                       key={key} 
                       name={item.name} 
-                      lastname={item.lastName1} 
+                      lastname1={item.lastName1} 
+                      lastname2={item.lastName2} 
                       age={item.age}  
                       ident={item.ident} 
                       typeIdent={item.typeIdent} 

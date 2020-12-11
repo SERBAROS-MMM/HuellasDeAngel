@@ -17,6 +17,7 @@ import {HTTP_CONSTANTS} from '../../../config/http-constants'
 import {requestHttp} from '../../../config/http-server'
 
 
+
 const styles = (theme) => ({
   paper: {
     maxWidth: 'auto',
@@ -63,19 +64,21 @@ const Buscar=(props)=> {
 
   const getFilterPersons=async()=>{
     try {
-      const endpoint=HTTP_CONSTANTS.persons
+      /*const endpoint=HTTP_CONSTANTS.persons
       const data={filterPersons}
       const response=await requestHttp('get',endpoint,data)
-      setPersons(response)
-    } catch (error) {
-      console.error('error.getFilterPersons:',error)      
-      const filteredPersons=BOYS.filter((item)=>{
+      setPersons(response)*/
+      if(filterPersons !==''){ const filteredPersons=BOYS.filter((item)=>{
         const a=(JSON.stringify(item)
            .toUpperCase()
            .indexOf(filterPersons.toUpperCase()) > -1 ? 1 : 0)
        return a > 0
       });
     setPersons(filteredPersons)
+      }
+    } catch (error) {
+      console.error('error.getFilterPersons:',error)      
+      
     }
 }
 
@@ -98,6 +101,8 @@ const Buscar=(props)=> {
 
     const reloadPersons=()=>{
         console.log("Funciona")
+        setFilterPersons('')
+        getPersons()
     }
 
   return (
@@ -111,11 +116,13 @@ const Buscar=(props)=> {
             <Grid item xs>
               <TextField id="filtro"
                 fullWidth
+                value={filterPersons}
                 onChange={(e)=>setFilterPersons(e.target.value)}
                 placeholder="Buscar por nombre, identificación, comisaría..."
                 InputProps={{
                 disableUnderline: true,
                 className: classes.searchInput,
+                
                 }}
               />
             </Grid>
@@ -124,8 +131,8 @@ const Buscar=(props)=> {
                 Agregar
               </Button>
               <Tooltip title="Reload">
-                <IconButton>
-                  <RefreshIcon className={classes.block} color="inherit" onClick={reloadPersons}/>        
+                <IconButton onClick={reloadPersons}>
+                  <RefreshIcon className={classes.block} color="inherit" />        
                 </IconButton>
               </Tooltip>
             </Grid>

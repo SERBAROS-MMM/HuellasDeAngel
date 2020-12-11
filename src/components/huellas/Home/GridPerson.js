@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function GridPerson({name,lastname,age,image,typeIdent,ident,gender}) {
+export default function GridPerson({name,lastname1,lastname2,age,image,typeIdent,ident,gender}) {
   const classes = useStyles();
 
  
@@ -36,7 +36,7 @@ export default function GridPerson({name,lastname,age,image,typeIdent,ident,gend
             {name} 
           </Typography>
           <Typography >
-            {lastname}
+            {lastname1} {lastname2}
           </Typography>
           <Typography >
             {typeIdent} {ident} 
@@ -53,9 +53,7 @@ export default function GridPerson({name,lastname,age,image,typeIdent,ident,gend
             Resumen
           </Typography>
           <Typography>
-            <div>
               Lorem ipsum dolor sit amet,<br></br> consectetur adipisicing elit. 
-            </div>
           </Typography>
         </CardContent>
         <CardContent >   

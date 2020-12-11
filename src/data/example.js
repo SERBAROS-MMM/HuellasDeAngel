@@ -4,6 +4,7 @@ export const BOYS = [
     {
         name:'JUAN FERNANDO',
         lastName1:'PEREZ LOPEZ',
+        lastName2:'',
         age:'10',
         gender: 'MAS',
         image:'https://thispersondoesnotexist.com/image',
@@ -13,6 +14,7 @@ export const BOYS = [
     {
         name:'MARIA EUGENIA',
         lastName1:'MARTINEZ RODRIGUEZ',
+        lastName2:'',
         age:'15',
         gender: 'FEM',
         image:'https://thispersondoesnotexist.com/image',
@@ -22,6 +24,7 @@ export const BOYS = [
     {
         name:'ALEJANDRO JOSE',
         lastName1:'FERNANDEZ GARCIA',
+        lastName2:'',
         age:'17',
         gender: 'MAS',
         image:'https://thispersondoesnotexist.com/image',
