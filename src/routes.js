@@ -22,6 +22,7 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import HomePage from "views/pages/HomePage.js";
 import LoginPage from "views/pages/LoginPage.js";
 import UserPage from "views/pages/UserPage.js";
+import AddPersonPage from "views/pages/AddPersonPage.js";
 
 const dashboardRoutes = [
   {
@@ -61,6 +62,22 @@ const dashboardRoutes = [
     name: "Configuracion",
     icon: Dashboard,
     component: UserPage,
+    navbar: false,
+    layout: "/admin"
+  },
+  {
+    path: "/parametros",
+    name: "Parametros",
+    icon: Dashboard,
+    component: UserPage,
+    navbar: true,
+    layout: "/admin"
+  },
+  {
+    path: "/agregarPersona",
+    name: "Agregar Persona",
+    icon: Dashboard,
+    component: AddPersonPage,
     navbar: false,
     layout: "/admin"
   },

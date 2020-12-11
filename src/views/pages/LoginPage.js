@@ -19,7 +19,7 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
 import imageFondo from "assets/img/bgblocks2.jpg";
 
-import NotificacionLogin from "components/huellas/NotificacionLogin.js";
+import NotificacionLogin from "components/huellas/Login/NotificacionLogin.js";
 
 const useStyles = makeStyles(styles);
 

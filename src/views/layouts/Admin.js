@@ -6,7 +6,7 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import Navbar from "components/huellas/NavbarPrincipal.js";
+import Navbar from "components/huellas/Admin/NavbarPrincipal.js";
 
 import Sidebar from "components/dashboard/Sidebar/Sidebar.js";
 
