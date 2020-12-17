@@ -52,11 +52,10 @@ export default function Admin({ ...rest }) {
   // states and functions
   const color = "blue";
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const { setUserLogged,userLogged } = useContext(UserContext)
+  const { setUserLogged } = useContext(UserContext)
 
   const autologin = async () => {
 
-    console.log('autologin')
     try {
       const endpoint = HTTP_CONSTANTS.autologin
       const response = await requestHttp('post', endpoint)
@@ -65,10 +64,9 @@ export default function Admin({ ...rest }) {
         setUserLogged(userFound)
       } else {
         unauthorized()
-        console.log('autologin 1')
+        
       }
     } catch (err) {
-      console.log('autologin error',err)
       unauthorized()
     }
   }

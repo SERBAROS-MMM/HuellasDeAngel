@@ -23,13 +23,13 @@ const useStyles = makeStyles(styles);
 export default function Sidebar(props) {
   const classes = useStyles();
   // verifies if routeName is the one active (in browser input)
-  function activeRoute(routeName) {
+ const activeRoute = (routeName) => {
     return window.location.href.indexOf(routeName) > -1 ? true : false;
   }
 
   const handleGoHome = () => {
-    window.location.href = '/admin/'
-  };
+    window.location.href ='/admin/inicio'
+  }
 
   const { color, logo, image, logoText, routes } = props;
   var links = (
@@ -68,16 +68,12 @@ export default function Sidebar(props) {
                 </Icon>
               ) : (
                 <prop.icon
-                  className={classNames(classes.itemIcon, whiteFontClasses, {
-                    [classes.itemIconRTL]: props.rtlActive
-                  })}
+                  className={classNames(classes.itemIcon, whiteFontClasses)}
                 />
               )}
               <ListItemText
                 primary={props.rtlActive ? prop.rtlName : prop.name}
-                className={classNames(classes.itemText, whiteFontClasses, {
-                  [classes.itemTextRTL]: props.rtlActive
-                })}
+                className={classNames(classes.itemText, whiteFontClasses)}
                 disableTypography={true}
               />
             </ListItem>
@@ -91,9 +87,7 @@ export default function Sidebar(props) {
       <Link
         to=''
         onClick={handleGoHome}
-        className={classNames(classes.logoLink, {
-          [classes.logoLinkRTL]: props.rtlActive
-        })}
+        className={classNames(classes.logoLink)}
         target="_blank"
       >
         <div className={classes.logoImage}>

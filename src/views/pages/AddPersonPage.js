@@ -75,7 +75,7 @@ export default function UserProfile() {
               <p className={classes.cardCategoryWhite}>Ingrese los siguientes datos</p>
             </CardHeader>
             <CardBody>
-              <GridContainer>
+              <GridContainer style={{margin:'20px 0px 20px 0px'}}>
                 <GridItem xs={12} sm={12} md={4}>
                   <TextField
                     label="Nombres"
@@ -157,17 +157,17 @@ export default function UserProfile() {
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
-                  <h8>Subir foto de perfil</h8><UploadImage/>
+                  <h6>Subir foto de perfil</h6><UploadImage/>
                 </GridItem>
               </GridContainer>
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
-                  <h8>Adjuntar formato de ingreso</h8><UploadFile/>
+                  <h6>Adjuntar formato de ingreso</h6><UploadFile/>
                 </GridItem>
                 </GridContainer>
                 <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
-                  <h8>Adjuntar evaluación médica</h8><UploadFile/>
+                  <h6>Adjuntar evaluación médica</h6><UploadFile/>
                 </GridItem>
               </GridContainer>
             </CardBody>
