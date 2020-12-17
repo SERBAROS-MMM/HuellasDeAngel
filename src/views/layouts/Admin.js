@@ -26,7 +26,7 @@ const switchRoutes = (
     {
     routes.map((prop, key) => {
       if (prop.layout === "/admin") {
-        console.log(prop.layout + prop.path)
+       
         return (
           
           <Route

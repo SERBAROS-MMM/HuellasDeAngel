@@ -69,7 +69,7 @@ const [password, setPassword] = useState('')
  }
     
   const redirectHome = () => {
-    window.location.href = '/'//history.push('/')
+    window.location.href = '/admin/login'
   }
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");

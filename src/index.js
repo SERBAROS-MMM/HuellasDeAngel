@@ -18,9 +18,9 @@ ReactDOM.render(
       <Route path="/auth" component={Auth} />
       <UserContextStore >
        <Route path="/admin" component={Admin} />     
-       <Redirect from="/" to="/admin/inicio" />
+       
      </UserContextStore>  
-      
+     <Redirect from="/" to="/admin/inicio" />
     </Switch>
   </Router>,
   document.getElementById("root")
