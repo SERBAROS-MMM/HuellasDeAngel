@@ -13,15 +13,16 @@ import Auth from "views/layouts/Auth"
 var hist = createBrowserHistory();
 
 ReactDOM.render(
+  <UserContextStore >
   <Router history={hist}>
     <Switch>
       <Route path="/auth" component={Auth} />
-      <UserContextStore >
+     
        <Route path="/admin" component={Admin} />     
-       
-     </UserContextStore>  
+   
      <Redirect from="/" to="/admin/inicio" />
     </Switch>
-  </Router>,
+  </Router>
+  </UserContextStore>  ,
   document.getElementById("root")
 );
