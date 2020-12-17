@@ -4,6 +4,7 @@ import {HTTP_CONSTANTS} from './http-constants'
 const headersConfig=()=>{
     const defaultHeaders={
         'Content-Type':'application/json',
+        'x-access-token': sessionStorage.getItem('_TOKEN_'),
         Accept:'application/json'
     }
     return defaultHeaders

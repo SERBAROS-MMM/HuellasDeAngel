@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useContext} from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
@@ -7,8 +7,11 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Navbar from "components/huellas/Admin/NavbarPrincipal.js";
-
 import Sidebar from "components/dashboard/Sidebar/Sidebar.js";
+
+import {UserContext} from './../../contexts/UserContext'
+import {HTTP_CONSTANTS} from './../../config/http-constants'
+import {requestHttp} from './../../config/http-server'
 
 import routes from "routes.js";
 
@@ -23,8 +26,9 @@ const switchRoutes = (
     {
     routes.map((prop, key) => {
       if (prop.layout === "/admin") {
-        
+        console.log(prop.layout + prop.path)
         return (
+          
           <Route
             path={prop.layout + prop.path}
             component={prop.component}
@@ -48,7 +52,37 @@ export default function Admin({ ...rest }) {
   // states and functions
   const color = "blue";
   const [mobileOpen, setMobileOpen] = React.useState(false);
- 
+  const { setUserLogged,userLogged } = useContext(UserContext)
+
+  const autologin = async () => {
+
+    console.log('autologin')
+    try {
+      const endpoint = HTTP_CONSTANTS.autologin
+      const response = await requestHttp('post', endpoint)
+      const { status, userFound } = response
+      if (status === 200) {
+        setUserLogged(userFound)
+      } else {
+        unauthorized()
+        console.log('autologin 1')
+      }
+    } catch (err) {
+      console.log('autologin error',err)
+      unauthorized()
+    }
+  }
+
+  const unauthorized = () => {
+    sessionStorage.removeItem('_TOKEN_')
+    window.location.href = '/auth/login'
+  }
+
+  useEffect(() => {
+    autologin()
+    return () => {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -76,11 +110,13 @@ export default function Admin({ ...rest }) {
       window.removeEventListener("resize", resizeFunction);
     };
   }, [mainPanel]);
+
   return (
+    
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes.filter(route => (route.navbar)) }
-        logoText={"Huellas de angel"}
+        logoText={"Huellas de Angel"}
         logo={logo}
         image={bgImage}
         handleDrawerToggle={handleDrawerToggle}
@@ -100,5 +136,6 @@ export default function Admin({ ...rest }) {
           </div>
       </div>
     </div>
+  
   );
 }

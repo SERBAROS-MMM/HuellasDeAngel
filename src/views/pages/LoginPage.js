@@ -20,30 +20,63 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import imageFondo from "assets/img/bgblocks2.jpg";
 
 import NotificacionLogin from "components/huellas/Login/NotificacionLogin.js";
+import {HTTP_CONSTANTS} from './../../config/http-constants'
+import {requestHttp} from './../../config/http-server'
 
 const useStyles = makeStyles(styles);
 
 const LoginPage = () =>{
 
 const [notificacion, setNotificacion] = useState(false);
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
   
   const loginHandler = (e) => {
     e.preventDefault();
-    
-    if (e.target.elements.namedItem("email").value==='a@mail.com' && e.target.elements.namedItem("pass").value === '123456'){
-      window.location.href = '/';
-    }else{
-      e.target.elements.namedItem("email").value='' 
-      e.target.elements.namedItem("pass").value =''
-      setNotificacion(true)
-      };
+    const data = {
+      email,
+      password,
+    }
+    if(notificacion){
+      setNotificacion(false)
+    } 
+    console.log(notificacion)
+
+    loginRequest(data)    
   }
   
+  const loginRequest = async (data) => {
+    try {
+      const endpoint = HTTP_CONSTANTS.login
+      const response = await requestHttp('post',endpoint, data)
+      if (response.status === 200) {
+        sessionStorage.setItem('_TOKEN_', response.token)
+        redirectHome()
+      } else {
+        errorLogin()
+      }
+      
+    } catch (err) {
+      errorLogin()
+      
+    }
+  }
+
+ const errorLogin = () =>{
+    setEmail('')
+    setPassword('')
+    setNotificacion(true)
+ }
+    
+  const redirectHome = () => {
+    window.location.href = '/'//history.push('/')
+  }
 
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
+
   const classes = useStyles();
   return (
     <div>
@@ -72,10 +105,12 @@ const [notificacion, setNotificacion] = useState(false);
                         fullWidth: true
                       }}
                       inputProps={{
-                        type: "email",
+                        type: "email",  
+                        value: email,
+                        onChange:(e) => setEmail(e.target.value),
                         endAdornment: (
                           <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
+                            <Email className={classes.inputIconsColor}  />
                           </InputAdornment>
                         )
                       }}
@@ -88,6 +123,8 @@ const [notificacion, setNotificacion] = useState(false);
                       }}
                       inputProps={{
                         type: "password",
+                        value:password,
+                        onChange:(e) => setPassword(e.target.value),
                         endAdornment: (
                           <InputAdornment position="end">
                             <Icon className={classes.inputIconsColor}>

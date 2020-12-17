@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useContext} from "react"
 import classNames from "classnames"
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles"
@@ -10,6 +10,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener"
 import Hidden from "@material-ui/core/Hidden"
 import Poppers from "@material-ui/core/Popper"
 import Divider from "@material-ui/core/Divider"
+import {UserContext} from 'contexts/UserContext'
 // @material-ui/icons
 import Person from "@material-ui/icons/Person"
 
@@ -23,6 +24,7 @@ const useStyles = makeStyles(styles);
 
 export default function NavbarLinks() {
   const classes = useStyles();
+  const { userLogged } = useContext(UserContext)
   
   const [openProfile, setOpenProfile] = React.useState(null)
   
@@ -44,6 +46,8 @@ export default function NavbarLinks() {
   };
 
   const handleCloseSession = () => {
+    console.log('cerrar sesion')
+    sessionStorage.removeItem('_TOKEN_')
     window.location.href = '/auth/login'
   };
 
@@ -64,7 +68,6 @@ export default function NavbarLinks() {
           onClick={handleClickMenuPerfil}
           className={classes.buttonLink}
         >
-          
           <Person className={classes.icons} />
           <Hidden mdUp implementation="css">
             <p className={classes.linkText}>Perfil</p>
@@ -97,7 +100,7 @@ export default function NavbarLinks() {
                       onClick={handleShowPerfil}
                       className={classes.dropdownItem}
                     >
-                      Perfil
+                      Perfil 
                     </MenuItem>
                     <MenuItem
                       onClick={handleClickSettings}

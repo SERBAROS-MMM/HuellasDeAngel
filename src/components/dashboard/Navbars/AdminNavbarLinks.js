@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useContext} from "react"
 import classNames from "classnames"
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles"
@@ -15,6 +15,7 @@ import Person from "@material-ui/icons/Person"
 // core components
 import Button from "components/dashboard/CustomButtons/Button.js"
 
+import {UserContext} from 'contexts/UserContext'
 import styles from "assets/jss/material-dashboard-react/components/headerLinksStyle.js"
 
 const useStyles = makeStyles(styles)
@@ -22,6 +23,7 @@ const useStyles = makeStyles(styles)
 export default function AdminNavbarLinks() {
   const classes = useStyles();
   const [openProfile, setOpenProfile] = React.useState(null)
+  const {userLogged} = useContext(UserContext) 
 
   const handleClickProfile = event => {
     if (openProfile && openProfile.contains(event.target)) {
@@ -39,6 +41,8 @@ export default function AdminNavbarLinks() {
   };
 
   const handleCloseSession = () => {
+    console.log('cerrar sesion')
+    sessionStorage.removeItem('_TOKEN_')
     window.location.href = '/auth/login'
   };
 
@@ -59,7 +63,7 @@ export default function AdminNavbarLinks() {
         >
           <Person className={classes.icons} />
           <Hidden mdUp implementation="css">
-            <p className={classes.linkText}>Perfil</p>
+            <p className={classes.linkText}>{JSON.stringify(userLogged) === '{}' ? 'Perfil' : userLogged.username }</p>
           </Hidden>
         </Button>
         <Poppers
