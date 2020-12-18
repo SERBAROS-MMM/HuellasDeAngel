@@ -55,7 +55,8 @@ const Buscar=(props)=> {
       try {
         const endpoint=HTTP_CONSTANTS.persons
         const response=await requestHttp('get',endpoint)
-        setPersons(response)
+        console.log(response)
+        setPersons(response.response)
       } catch (error) {
         console.error('error.getPersons:',error)
         setPersons(BOYS)
@@ -68,13 +69,13 @@ const Buscar=(props)=> {
       const data={filterPersons}
       const response=await requestHttp('get',endpoint,data)
       setPersons(response)*/
-      if(filterPersons !==''){ const filteredPersons=BOYS.filter((item)=>{
+      if(filterPersons !==''){ const filteredPersons=persons.filter((item)=>{
         const a=(JSON.stringify(item)
            .toUpperCase()
            .indexOf(filterPersons.toUpperCase()) > -1 ? 1 : 0)
        return a > 0
       });
-    setPersons(filteredPersons)
+      setPersons(filteredPersons)
       }
     } catch (error) {
       console.error('error.getFilterPersons:',error)      
