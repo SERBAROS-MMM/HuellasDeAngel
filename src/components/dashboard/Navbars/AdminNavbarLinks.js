@@ -7,7 +7,6 @@ import MenuList from "@material-ui/core/MenuList"
 import Grow from "@material-ui/core/Grow"
 import Paper from "@material-ui/core/Paper"
 import ClickAwayListener from "@material-ui/core/ClickAwayListener"
-import Hidden from "@material-ui/core/Hidden"
 import Poppers from "@material-ui/core/Popper"
 import Divider from "@material-ui/core/Divider"
 // @material-ui/icons
@@ -53,18 +52,16 @@ export default function AdminNavbarLinks() {
     <div>
       <div className={classes.manager}>
         <Button
-          color={window.innerWidth > 959 ? "transparent" : "white"}
-          justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
+          color={"white"}
+          //justIcon={window.innerWidth > 959}
+         // simple={!(window.innerWidth > 959)}
           aria-owns={openProfile ? "profile-menu-list-grow" : null}
           aria-haspopup="true"
           onClick={handleClickProfile}
           className={classes.buttonLink}
         >
           <Person className={classes.icons} />
-          <Hidden mdUp implementation="css">
-            <p className={classes.linkText}>{JSON.stringify(userLogged) === '{}' ? 'Perfil' : userLogged.username }</p>
-          </Hidden>
+            <p className={classes.linkText}>{JSON.stringify(userLogged) === '{}' ? 'Perfil' : userLogged.email }</p>
         </Button>
         <Poppers
           open={Boolean(openProfile)}

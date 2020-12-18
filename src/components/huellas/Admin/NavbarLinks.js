@@ -61,7 +61,7 @@ export default function NavbarLinks() {
         <Button
           color={"transparent"}
           //justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
+          //simple={!(window.innerWidth > 959)}
           aria-owns={openProfile ? "profile-menu-list-grow" : null}
           aria-haspopup="true"
           onClick={handleClickMenuPerfil}

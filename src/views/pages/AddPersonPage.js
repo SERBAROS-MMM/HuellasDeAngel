@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -15,6 +15,7 @@ import TextField from '@material-ui/core/TextField';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import UploadImage from "components/huellas/Person/UploadImage";
 import UploadFile from "components/huellas/Person/UploadFile";
+
 
 const useStyles = makeStyles((styles) => ({
   cardCategoryWhite: {
@@ -47,11 +48,24 @@ const useStyles = makeStyles((styles) => ({
   importLabel: {
     color: "black",
   },
+  itemAdd:{
+    margin:'20px 0px 20px 0px'
+  }
 }));
 
 export default function UserProfile() {
   const classes = useStyles();
   
+  const [name, setName] =useState('')
+  const [lastName1, setLastName1] =useState('')
+  const [lastName2, setLastName2] =useState('')
+  const [birthday, setBirthday] =useState('')
+  const [age, setAge] =useState('')
+  const [gender, setGender] =useState('')
+  const [imageURL, setImageURL] =useState('https://thispersondoesnotexist.com/image')
+  const [typeIdent, setTypeIdent] =useState('')
+  const [ident, setIdent] =useState('')
+
   const [state, setState] = React.useState({
     age: '',
     name: 'hai',
@@ -66,138 +80,177 @@ export default function UserProfile() {
   };
 
   return (
-    <div>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Nuevo niño</h4>
-              <p className={classes.cardCategoryWhite}>Ingrese los siguientes datos</p>
-            </CardHeader>
-            <CardBody>
-              <GridContainer style={{margin:'20px 0px 20px 0px'}}>
-                <GridItem xs={12} sm={12} md={4}>
-                  <TextField
-                    label="Nombres"
-                    id="name"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <TextField
-                    label="Apellidos"
-                    id="surname"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
-                  <TextField
-                    label="Fecha de nacimiento"
-                    id="date"                    
-                    type="date"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
-                </GridItem>
-              </GridContainer>     
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                  <TextField
-                    label="Edad"
-                    id="Age"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                
-                <GridItem xs={12} sm={12} md={4}>                
-                  <InputLabel shrink htmlFor="age-native-label-placeholder">
-                    Sexo
-                  </InputLabel>
-                  <NativeSelect
-                    value={state.age}
-                    onChange={handleChange}
-                    margin="normal"
-                    inputProps={{
-                      name: 'gender',
-                      id: 'gender',
-                    }}
-                  >
-                    <option value="">Elegir..</option>
-                    <option value={'Mas'}>Masculino</option>
-                    <option value={'Fem'}>Femenino</option>
-                  </NativeSelect>
-                </GridItem>
-                <GridItem xs={12} sm={12} md={4}>                  
-                  <InputLabel shrink htmlFor="age-native-label-placeholder">
-                    Comisaría
-                  </InputLabel>
-                  <NativeSelect
-                    value={state.age}
-                    onChange={handleChange}
-                    margin="normal"
-                    inputProps={{
-                      name: 'origin',
-                      id: 'origin',
-                    }}
-                  >
-                    <option value="">No aplica</option>
-                    <option value={10}>Comisaría 1</option>
-                    <option value={20}>Comisaría 2</option>
-                    <option value={30}>Comisaría 3</option>
-                  </NativeSelect>
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <h6>Subir foto de perfil</h6><UploadImage/>
-                </GridItem>
-              </GridContainer>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <h6>Adjuntar formato de ingreso</h6><UploadFile/>
-                </GridItem>
-                </GridContainer>
-                <GridContainer>
-                <GridItem xs={12} sm={12} md={12}>
-                  <h6>Adjuntar evaluación médica</h6><UploadFile/>
-                </GridItem>
-              </GridContainer>
-            </CardBody>
-            <CardFooter>
-              <Button color="primary">Actualizar</Button>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src='https://thispersondoesnotexist.com/image' alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
-              <h4 className={classes.cardTitle}>Alec Thompson</h4>
-              <p className={classes.description}>
-                Don{"'"}t be scared of the truth because we need to restart the
-                human foundation in truth And I love you like Kanye loves Kanye
-                I love Rick Owens’ bed design but the back is...
-              </p>
-              <Button color="primary" round>
-                Follow
-              </Button>
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
+    <div>       
+      <Card profile>
+        <CardAvatar profile>
+          <a href="#pablo" onClick={e => e.preventDefault()}>
+            <img src={imageURL} alt="..." />
+          </a>
+        </CardAvatar>
+        <UploadImage/>
+        <CardBody>
+          <GridContainer >
+            <GridItem xs={12} sm={12} md={8}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>Datos Básicos</h4>
+                </CardHeader>
+                <CardBody>
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={4} >
+                      <TextField
+                        label="Nombre"
+                        id="name"
+                        value ={name}
+                        onChange={(e) => setName(e.target.value)}
+                        fullWidth
+                        margin="normal"
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <TextField
+                        label="1er. Apellido"
+                        id="lastname1"
+                        value ={lastName1}
+                        onChange={(e) => setLastName1(e.target.value)}
+                        fullWidth
+                        margin="normal"
+                    />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <TextField
+                        label="2do. Apellido"
+                       id="lastname2"
+                        value ={lastName2}
+                       onChange={(e) => setLastName2(e.target.value)}
+                       fullWidth
+                       margin="normal"
+                    />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4} >
+                      <TextField
+                        label="No. Identificacion"
+                        id="ident"
+                        value ={ident}
+                        onChange={(e) => setIdent(e.target.value)}
+                        fullWidth
+                        margin="normal"
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4}>
+                      <TextField
+                        label="Fecha de nacimiento"
+                        id="birthday"                    
+                        type="date"
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        fullWidth
+                        margin="normal"
+                        value ={birthday}
+                        onChange={(e) => (setBirthday(e.target.value), setAge(2))}
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4}>
+                    <TextField
+                      label="Edad"
+                      id="age"
+                      fullWidth
+                      margin="normal"
+                      value ={age}
+                      onChange={(e) => setAge(e.target.value)}
+                    />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={4}>    
+                    <InputLabel shrink htmlFor="origin">
+                      Tipo Identificacion
+                    </InputLabel>
+                    <NativeSelect
+                      value={typeIdent}
+                      onChange={(e) => setTypeIdent(e.target.value)}
+                      
+                      inputProps={{
+                        name: 'origin',
+                        id: 'origin',
+                      }}
+                    >
+                      <option value="">Seleccionar</option>
+                      <option value={'RC'}>Registro Civil</option>
+                      <option value={'TI'}>Tarjeta Identidad</option>
+                      <option value={'CC'}>Cedula Ciudadania</option>
+                      <option value={'PA'}>Pasaporte</option>
+                    </NativeSelect>
+                      
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>                
+                    <InputLabel shrink htmlFor="age-native-label-placeholder">
+                      Sexo
+                    </InputLabel>
+                    <NativeSelect
+                      value={gender}
+                      onChange={(e) => setGender(e.target.value)}
+                      margin="normal"
+                      inputProps={{
+                        name: 'gender',
+                        id: 'gender',
+                      }}
+                    >
+                      <option value="">Elegir..</option>
+                      <option value={'Mas'}>Masculino</option>
+                      <option value={'Fem'}>Femenino</option>
+                    </NativeSelect>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>                  
+                    <InputLabel shrink >
+                      Lugar Origen
+                    </InputLabel>
+                    <NativeSelect
+                      value={state.age}
+                      onChange={handleChange}
+                      margin="normal"
+                      inputProps={{
+                        name: 'origin',
+                        id: 'origin',
+                      }}
+                    >
+                      <option value="">No aplica</option>
+                      <option value={10}>Comisaría 1</option>
+                      <option value={20}>Comisaría 2</option>
+                      <option value={30}>Comisaría 3</option>
+                    </NativeSelect>
+                  </GridItem>
+                  </GridContainer>
+                </CardBody>
+              </Card>
+            </GridItem>
+            <GridItem xs={12} sm={12} md={4}>
+              <Card>
+                <CardHeader color="primary">
+                  <h4 className={classes.cardTitleWhite}>Documentos</h4>
+                </CardHeader>
+                <CardBody>
+                  <GridContainer >                
+                    <GridItem xs={12} sm={12} md={12}>
+                      <h6>Adjuntar formato de ingreso</h6><UploadFile/>
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={12}>
+                      <h6>Adjuntar evaluación médica</h6><UploadFile/>
+                    </GridItem>
+               </GridContainer>
+               </CardBody>
+               </Card> 
+            </GridItem>
+          </GridContainer>
+        </CardBody>
+        <CardFooter>
+          <Button color="primary">Actualizar</Button>
+        </CardFooter>
+      </Card>   
     </div>
   );
 }
+
+
+
+      
