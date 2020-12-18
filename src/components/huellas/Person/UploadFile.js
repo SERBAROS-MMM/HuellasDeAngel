@@ -16,9 +16,9 @@ class MediaCapture extends Component {
         classes: PropTypes.object.isRequired
     };    
 
-    handleCapture = ({ target }) => {
+    handleCaptureFile = ({ target }) => {
         const fileReader = new FileReader();
-        const name = target.accept.includes('image') ? 'images':
+        const name = target.accept.includes('.docx,.doc,.pdf') ? '.docx,.doc,.pdf':
 
         fileReader.readAsDataURL(target.files[0]);
         fileReader.onload = (e) => {
@@ -34,10 +34,10 @@ class MediaCapture extends Component {
         return (
             <Fragment>
                 <input
-                    accept="image/*"
+                    accept=".docx,.doc,.pdf"
                     className={classes.input}
                     id="icon-button-photo"
-                    onChange={this.handleCapture}
+                    onChange={this.handleCaptureFile}
                     type="file"
                 />
                 <label htmlFor="icon-button-photo">
