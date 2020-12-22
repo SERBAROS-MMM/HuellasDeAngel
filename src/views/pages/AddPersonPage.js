@@ -17,6 +17,7 @@ import UploadImage from "components/huellas/Person/UploadImage";
 import UploadFile from "components/huellas/Person/UploadFile";
 import imgProfile from "./../../assets/img/profile.png"
 
+import axios from 'axios'
 
 const useStyles = makeStyles((styles) => ({
   cardCategoryWhite: {
@@ -66,13 +67,25 @@ export default function UserProfile() {
   const [birthday, setBirthday] =useState('')
   const [age, setAge] =useState('')
   const [gender, setGender] =useState('')
-  const [imageURL, setImageURL] =useState(imgProfile)
+  const [image, setImage] =useState(imgProfile)
   const [typeIdent, setTypeIdent] =useState('')
   const [ident, setIdent] =useState('')
   const [state, setState] = React.useState({
     age: '',
     name: 'hai',
   });
+
+  const sendImage = (name) =>{
+    const data = new FormData()
+    data.append("name",name)
+    data.append("file",image)
+    console.log(data)
+    axios.post('http://localhost:4000/API/upload',data)
+    .then(res =>console.log(res))
+    .catch(err=>console.log(err))
+
+  }
+
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -84,7 +97,8 @@ export default function UserProfile() {
 
   const changeIMG = (img) =>{
     console.log('a')
-    setImageURL(img)
+    setImage(img)
+    //sendImage('aaaa')
   }
 
   return (
@@ -92,7 +106,7 @@ export default function UserProfile() {
       <Card profile>
         <CardAvatar profile>
           <a href="#pablo" onClick={e => e.preventDefault()}>
-            <img src={imageURL} alt="..." />
+            <img src={image} alt="..." />
           </a>
         </CardAvatar>
         <UploadImage onChange={changeIMG} />
