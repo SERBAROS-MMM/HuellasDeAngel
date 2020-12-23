@@ -25,6 +25,7 @@ export const requestHttp=async(
             params,
             headers: headersConfig()
         }
+
         const response=await axios(options)
         const {data}=response
         return data

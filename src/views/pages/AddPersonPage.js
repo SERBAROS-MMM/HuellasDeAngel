@@ -16,6 +16,8 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import UploadImage from "components/huellas/Person/UploadImage";
 import UploadFile from "components/huellas/Person/UploadFile";
 import imgProfile from "./../../assets/img/profile.png"
+import {HTTP_CONSTANTS} from './../../config/http-constants'
+import {requestHttp} from './../../config/http-server'
 
 import axios from 'axios'
 
@@ -80,11 +82,12 @@ export default function UserProfile() {
     data.append("name",name)
     data.append("file",image)
     console.log(data)
-    axios.post('http://localhost:4000/API/upload',data)
+    /*axios.post('http://localhost:4000/API/upload',data)
     .then(res =>console.log(res))
-    .catch(err=>console.log(err))
+    .catch(err=>console.log(err))*/
 
   }
+
 
 
   const handleChange = (event) => {
@@ -98,7 +101,45 @@ export default function UserProfile() {
   const changeIMG = (img) =>{
     console.log('a')
     setImage(img)
-    //sendImage('aaaa')
+    sendImage('aaaa')
+  }
+
+  const addPersonHandler = (e) => {
+    e.preventDefault();
+    const data = {
+      name,
+      lastName1,
+      lastName2,
+      birthday,
+      age,
+      gender,
+      image,
+      typeIdent,
+      ident,
+    }
+    addPersonRequest(data)    
+  }
+  
+  const redirectHome = () => {
+    window.location.href = '/admin/login'
+  }
+
+  const addPersonRequest = async (data) => {
+    try {
+      const endpoint = HTTP_CONSTANTS.persons
+      const response = await requestHttp('post',endpoint, data)
+      console.log(response)
+      if (response.status === 201) {
+        
+        redirectHome()
+      } else {
+        console.log(response)
+      }
+      
+    } catch (err) {
+      console.log(err)
+      
+    }
   }
 
   return (
@@ -111,7 +152,7 @@ export default function UserProfile() {
         </CardAvatar>
         <UploadImage onChange={changeIMG} />
         <CardBody>
-          <GridContainer >
+          <GridContainer>
             <GridItem xs={12} sm={12} md={8}>
               <Card>
                 <CardHeader color="primary">
@@ -119,7 +160,7 @@ export default function UserProfile() {
                 </CardHeader>
                 <CardBody>
                   <GridContainer>
-                    <GridItem xs={12} sm={12} md={4} >
+                    <GridItem xs={12} sm={12} md={4}>
                       <TextField
                         label="Nombre"
                         id="name"
@@ -149,6 +190,8 @@ export default function UserProfile() {
                        margin="normal"
                     />
                     </GridItem>
+                    </GridContainer>
+                    <GridContainer>
                     <GridItem xs={12} sm={12} md={4} >
                       <TextField
                         label="No. Identificacion"
@@ -159,19 +202,19 @@ export default function UserProfile() {
                         margin="normal"
                       />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={4}>
+                    <GridItem xs={12} sm={12} md={4} style={{textAlign: 'left'}}>
                       <TextField
                         label="Fecha de nacimiento"
                         id="birthday"                    
                         type="date"
                         className={classes.textField}
+                        fullWidth
                         InputLabelProps={{
                           shrink: true,
                         }}
-                        fullWidth
                         margin="normal"
                         value ={birthday}
-                        onChange={(e) => (setBirthday(e.target.value), setAge(2))}
+                        onChange={(e) => (setBirthday(e.target.value))}
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4}>
@@ -184,17 +227,19 @@ export default function UserProfile() {
                       onChange={(e) => setAge(e.target.value)}
                     />
                     </GridItem>
-                    <GridItem xs={12} sm={12} md={4}>    
-                    <InputLabel shrink htmlFor="origin">
+                    </GridContainer>
+                    <GridContainer style={{textAlign: 'left',marginTop:'16px'}}>
+                  <GridItem xs={12} sm={12} md={4} >
+                    <InputLabel shrink htmlFor="tipoIdentificacion">
                       Tipo Identificacion
                     </InputLabel>
                     <NativeSelect
                       value={typeIdent}
                       onChange={(e) => setTypeIdent(e.target.value)}
-                      
+                      fullWidth                     
                       inputProps={{
-                        name: 'origin',
-                        id: 'origin',
+                        name: 'tipoIdentificacion',
+                        id: 'tipoIdentificacion',
                       }}
                     >
                       <option value="">Seleccionar</option>
@@ -206,12 +251,13 @@ export default function UserProfile() {
                       
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>                
-                    <InputLabel shrink htmlFor="age-native-label-placeholder">
+                    <InputLabel shrink htmlFor="gender">
                       Sexo
                     </InputLabel>
                     <NativeSelect
                       value={gender}
                       onChange={(e) => setGender(e.target.value)}
+                      fullWidth
                       margin="normal"
                       inputProps={{
                         name: 'gender',
@@ -231,6 +277,7 @@ export default function UserProfile() {
                       value={state.age}
                       onChange={handleChange}
                       margin="normal"
+                      fullWidth
                       inputProps={{
                         name: 'origin',
                         id: 'origin',
@@ -266,13 +313,9 @@ export default function UserProfile() {
           </GridContainer>
         </CardBody>
         <CardFooter>
-          <Button color="primary">Actualizar</Button>
+          <Button color="primary" onClick={addPersonHandler}>Actualizar</Button>
         </CardFooter>
       </Card>   
     </div>
   );
 }
-
-
-
-      

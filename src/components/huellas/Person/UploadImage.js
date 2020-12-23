@@ -3,6 +3,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import imageCompression from 'browser-image-compression'
 
 const useStyles = makeStyles((styles) => ({
     input: {
@@ -14,17 +15,46 @@ const UploadImage = ({onChange}) => {
 
     const classes = useStyles();
 
-    const handleChange = (e) => {
-        const reader = new FileReader();
+    const handleChange = async (e) => {
+
+        const imgBlob =await compressImage(e.target.files[0])
+        
+        const blobUrl = URL.createObjectURL(imgBlob)
+        //console.log(blobUrl)
+        onChange(blobUrl)
+        /*const reader = new FileReader();
         
         reader.onload = () =>{
           if(reader.readyState === 2){
- 
-            onChange(reader.result)
+            console.log(reader.result)
+            //onChange(reader.result)
           }
         }
-        reader.readAsDataURL(e.target.files[0])
+        reader.readAsDataURL(e.target.files[0])*/
       }
+
+    const compressImage = async (img) =>{
+
+        console.log('originalFile instanceof Blob', img instanceof Blob)// true
+        console.log(`originalFile size ${img.size / 1024 / 1024} MB`)
+        
+        const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true
+          }
+        
+          try {
+            const compressedFile = await imageCompression(img, options);
+            //console.log('compressedFile instanceof Blob', compressedFile instanceof Blob) // true
+           // console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`) // smaller than maxSizeMB
+         
+            return compressedFile // write your own logic
+          } catch (error) {
+            console.log(error)
+            return img
+          }
+    }
     
     return (
        
