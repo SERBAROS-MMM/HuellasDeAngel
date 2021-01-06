@@ -33,7 +33,7 @@ return (
                       ident={item.ident} 
                       typeIdent={item.typeIdent} 
                       gender={item.gender} 
-                      image='https://thispersondoesnotexist.com/image'/>
+                      image = {item.imageURL} />
                 )
             }            
         </GridList>

@@ -16,12 +16,12 @@ const UploadImage = ({onChange}) => {
     const classes = useStyles();
 
     const handleChange = async (e) => {
-
-        const imgBlob =await compressImage(e.target.files[0])
-        
+        const imagenInicial = e.target.files[0]
+        const imgBlob =await compressImage(imagenInicial)
+        const imagenFinal =  new File([imgBlob], imagenInicial.name, { lastModified: new Date().getTime(), type: imgBlob.type })
         const blobUrl = URL.createObjectURL(imgBlob)
-        //console.log(blobUrl)
-        onChange(blobUrl)
+        //console.log('imagenes:',file,i)
+        onChange(imagenFinal,blobUrl)
         /*const reader = new FileReader();
         
         reader.onload = () =>{
@@ -33,10 +33,11 @@ const UploadImage = ({onChange}) => {
         reader.readAsDataURL(e.target.files[0])*/
       }
 
-    const compressImage = async (img) =>{
 
-        console.log('originalFile instanceof Blob', img instanceof Blob)// true
-        console.log(`originalFile size ${img.size / 1024 / 1024} MB`)
+      const compressImage = async (img) =>{
+
+        //console.log('originalFile instanceof Blob', img instanceof Blob)// true
+        //console.log(`originalFile size ${img.size / 1024 / 1024} MB`)
         
         const options = {
             maxSizeMB: 1,

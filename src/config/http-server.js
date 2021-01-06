@@ -33,3 +33,24 @@ export const requestHttp=async(
         throw error
     }
 }
+
+export const requestHttpFile=async(
+    method='post',
+    endPoint,
+    requestData={}
+)=>{
+    try {
+        const url=HTTP_CONSTANTS.urlUp+endPoint
+        const options={
+            method,
+            url,
+            data: requestData,
+        }
+
+        const response=await axios(options)
+        const {data}=response
+        return data
+    } catch (error) {
+        throw error
+    }
+}

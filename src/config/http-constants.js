@@ -1,7 +1,10 @@
 export const HTTP_CONSTANTS={
-    url:'https://huellasdeangel.serbaros.com/API',
+    url:'http://localhost:4000/API',
+    urlUp:'http://localhost:4000/API/up',
     login:'/auth/login',
     autologin:'/auth/autologin',
     persons:'/persons/',
-    personsfilter:'/persons/filter/'
+    personsfilter:'/persons/filter/',
+    imageUp: '/image/',
+    uploadUP: '/upload/'
 }
