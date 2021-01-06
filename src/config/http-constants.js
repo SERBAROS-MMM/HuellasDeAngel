@@ -1,5 +1,5 @@
 export const HTTP_CONSTANTS={
-    url:'https://huellasdeangel.serbaros.com/API',
+    url:'http://localhost:4000/API',
     login:'/auth/login',
     autologin:'/auth/autologin',
     persons:'/persons/'
