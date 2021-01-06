@@ -12,10 +12,8 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import GridHome from 'components/huellas/Home/GridHome.js';
-import {BOYS} from '../../../data/example.js'
 import {HTTP_CONSTANTS} from '../../../config/http-constants'
 import {requestHttp} from '../../../config/http-server'
-
 
 
 const styles = (theme) => ({
@@ -45,7 +43,7 @@ const Buscar=(props)=> {
     window.location.href = '/admin/agregarPersona'
   }
 
-  const [persons, setPersons] = useState(BOYS)
+  const [persons, setPersons] = useState({})
 
   const [existPersons, setExistPersons] = useState(false)
 
@@ -55,55 +53,48 @@ const Buscar=(props)=> {
       try {
         const endpoint=HTTP_CONSTANTS.persons
         const response=await requestHttp('get',endpoint)
-        console.log(response)
         setPersons(response.response)
       } catch (error) {
         console.error('error.getPersons:',error)
-        setPersons(BOYS)
       }
   }
 
+  const getPersonsFiltered = async () =>{
+      const endpoint=HTTP_CONSTANTS.personsfilter+filterPersons
+      const response=await requestHttp('get',endpoint)
+      console.log(response)
+      setPersons(response.response)
+  }
+
   const getFilterPersons=async()=>{
-    try {
-      /*const endpoint=HTTP_CONSTANTS.persons
-      const data={filterPersons}
-      const response=await requestHttp('get',endpoint,data)
-      setPersons(response)*/
-      if(filterPersons !==''){ const filteredPersons=persons.filter((item)=>{
-        const a=(JSON.stringify(item)
-           .toUpperCase()
-           .indexOf(filterPersons.toUpperCase()) > -1 ? 1 : 0)
-       return a > 0
-      });
-      setPersons(filteredPersons)
+    try { 
+      if(filterPersons !==''){ 
+        await getPersonsFiltered()
+      }else{
+        await getPersons()
       }
     } catch (error) {
       console.error('error.getFilterPersons:',error)      
-      
     }
 }
 
-  useEffect(() => {
+  useEffect(() => {    
+
     getFilterPersons()
     return () => {}
     }, [filterPersons]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    getPersons()
-    return () => {}
-    }, [])
-
-  useEffect(() => {
     if (persons.length >0){
         setExistPersons(true)
+    }else{
+      setExistPersons(false)
     }
     return () => {}
     }, [persons])
 
     const reloadPersons=()=>{
-        console.log("Funciona")
         setFilterPersons('')
-        getPersons()
     }
 
   return (
@@ -150,3 +141,4 @@ Buscar.propTypes = {
 };
 
 export default withStyles(styles)(Buscar);
+

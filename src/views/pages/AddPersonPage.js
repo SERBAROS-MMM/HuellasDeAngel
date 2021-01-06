@@ -15,9 +15,10 @@ import TextField from '@material-ui/core/TextField';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import UploadImage from "components/huellas/Person/UploadImage";
 import UploadFile from "components/huellas/Person/UploadFile";
+import imgProfile from "./../../assets/img/profile.png"
 import {HTTP_CONSTANTS} from './../../config/http-constants'
-import {requestHttp} from './../../config/http-server'
-
+import {requestHttp,requestHttpFile} from './../../config/http-server'
+import path from 'path'
 
 const useStyles = makeStyles((styles) => ({
   cardCategoryWhite: {
@@ -27,6 +28,9 @@ const useStyles = makeStyles((styles) => ({
     marginTop: "0",
     marginBottom: "0"
   },
+  input: {
+    display: 'none'
+},
   cardTitleWhite: {
     color: "#FFFFFF",
     marginTop: "0px",
@@ -64,26 +68,38 @@ export default function UserProfile() {
   const [birthday, setBirthday] =useState('')
   const [age, setAge] =useState('')
   const [gender, setGender] =useState('')
-  const [imageURL, setImageURL] =useState('https://thispersondoesnotexist.com/image')
+  const [imageURL, setImageURL] =useState('')
+  const [file, setFile] =useState()
   const [typeIdent, setTypeIdent] =useState('')
   const [ident, setIdent] =useState('')
+  const [origin, setOrigin] =useState('')
+  const [image, setImage] =useState(imgProfile)
 
-  const [state, setState] = React.useState({
-    age: '',
-    name: 'hai',
-  });
+  const sendImage = async (inName) =>{
+    try {
     
-  const redirectHome = () => {
-    window.location.href = '/admin/login'
+    const data = new FormData()
+    data.append("_id",inName)
+    data.append("file",file)
+    /*console.log(file)
+    axios.post('http://localhost:5000/upload',data)
+    .then(res =>console.log(res))
+    .catch(err=>console.log(err))*/
+      const endpoint = HTTP_CONSTANTS.uploadUP
+      const response = await requestHttpFile('post',endpoint, data)
+      console.log(response)
+      updatePersonImageURL(inName)
+    } catch (err) {
+      console.log(err)
+    }
+
   }
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
-  };
+  const changeIMG = (fileImage,urlImg) =>{
+    
+    setImage(urlImg)
+    setFile(fileImage)
+  }
 
   const addPersonHandler = (e) => {
     e.preventDefault();
@@ -94,13 +110,32 @@ export default function UserProfile() {
       birthday,
       age,
       gender,
-      imageURL,
       typeIdent,
       ident,
     }
     addPersonRequest(data)    
   }
   
+  const redirectHome = () => {
+    window.location.href = '/admin/login'
+  }
+
+  const updatePersonImageURL = async (id) => {
+    try {
+      const endpoint = HTTP_CONSTANTS.persons+id
+      console.log(endpoint)
+      const data = {
+        imageURL
+      }
+      console.log(data)
+      const response = await requestHttp('put',endpoint,data )
+      console.log(response)
+      
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const addPersonRequest = async (data) => {
     try {
       const endpoint = HTTP_CONSTANTS.persons
@@ -108,7 +143,11 @@ export default function UserProfile() {
       console.log(response)
       if (response.status === 201) {
         
-        redirectHome()
+        const ext = HTTP_CONSTANTS.urlUp + HTTP_CONSTANTS.imageUp+response.response._id+path.extname(file.name)
+        console.log(ext)
+        setImageURL(ext)
+        sendImage(response.response._id)
+       // redirectHome()
       } else {
         console.log(response)
       }
@@ -124,10 +163,10 @@ export default function UserProfile() {
       <Card profile>
         <CardAvatar profile>
           <a href="#pablo" onClick={e => e.preventDefault()}>
-            <img src={imageURL} alt="..." />
+            <img src={image} alt="..." />
           </a>
         </CardAvatar>
-        <UploadImage/>
+        <UploadImage onChange={changeIMG} />
         <CardBody>
           <GridContainer>
             <GridItem xs={12} sm={12} md={8}>
@@ -251,8 +290,8 @@ export default function UserProfile() {
                       Lugar Origen
                     </InputLabel>
                     <NativeSelect
-                      value={state.age}
-                      onChange={handleChange}
+                      value={origin}
+                      onChange={(e) => setOrigin(e.target.value)}
                       margin="normal"
                       fullWidth
                       inputProps={{
@@ -296,7 +335,3 @@ export default function UserProfile() {
     </div>
   );
 }
-
-
-
-      

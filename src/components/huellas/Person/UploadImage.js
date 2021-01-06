@@ -1,43 +1,70 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import imageCompression from 'browser-image-compression'
 
-const styles = (theme) => ({
+const useStyles = makeStyles((styles) => ({
     input: {
         display: 'none'
     }
-});
+}))
 
-class MediaCapture extends Component {
-    static propTypes = {
-        classes: PropTypes.object.isRequired
-    };
+const UploadImage = ({onChange}) => {
+
+    const classes = useStyles();
+
+    const handleChange = async (e) => {
+        const imagenInicial = e.target.files[0]
+        const imgBlob =await compressImage(imagenInicial)
+        const imagenFinal =  new File([imgBlob], imagenInicial.name, { lastModified: new Date().getTime(), type: imgBlob.type })
+        const blobUrl = URL.createObjectURL(imgBlob)
+        //console.log('imagenes:',file,i)
+        onChange(imagenFinal,blobUrl)
+        /*const reader = new FileReader();
+        
+        reader.onload = () =>{
+          if(reader.readyState === 2){
+            console.log(reader.result)
+            //onChange(reader.result)
+          }
+        }
+        reader.readAsDataURL(e.target.files[0])*/
+      }
+
+
+      const compressImage = async (img) =>{
+
+        //console.log('originalFile instanceof Blob', img instanceof Blob)// true
+        //console.log(`originalFile size ${img.size / 1024 / 1024} MB`)
+        
+        const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true
+          }
+        
+          try {
+            const compressedFile = await imageCompression(img, options);
+            //console.log('compressedFile instanceof Blob', compressedFile instanceof Blob) // true
+           // console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`) // smaller than maxSizeMB
+         
+            return compressedFile // write your own logic
+          } catch (error) {
+            console.log(error)
+            return img
+          }
+    }
     
-    handleCapture = ({ target }) => {
-        const fileReader = new FileReader();
-        const name = target.accept.includes('image') ? 'images':
-
-        fileReader.readAsDataURL(target.files[0]);
-        fileReader.onload = (e) => {
-            this.setState((prevState) => ({
-                [name]: [...prevState[name], e.target.result]
-            }));
-        };
-    };
-
-    render() {
-        const { classes } = this.props;
-
-        return (
-            <Fragment>
+    return (
+       
+            <>
                 <input
                     accept="image/*"
                     className={classes.input}
                     id="icon-button-photo"
-                    onChange={this.handleCapture}
+                    onChange={handleChange}
                     type="file"
                 />
                 <label htmlFor="icon-button-photo">
@@ -45,9 +72,8 @@ class MediaCapture extends Component {
                         <PhotoCamera />
                     </IconButton>
                 </label>
-            </Fragment>
-        );
-    }
+            </>
+        )
 }
 
-export default withStyles(styles, { withTheme: true })(MediaCapture);
+export default UploadImage
