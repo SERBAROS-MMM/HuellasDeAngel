@@ -58,10 +58,10 @@ export default function GridPerson({name,lastname1,lastname2,age,image,typeIdent
         </CardContent>
         <CardContent >   
           <IconButton>
-            <SearchIcon /> Detalles
+            <SearchIcon /> Evaluaciones
           </IconButton>
           <IconButton >
-            <ModifyIcon /> Modificar
+            <ModifyIcon /> Detalles
           </IconButton>
           <IconButton >
             <AssignmentIcon /> Novedades

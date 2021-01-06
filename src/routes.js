@@ -23,6 +23,7 @@ import HomePage from "views/pages/HomePage.js";
 import LoginPage from "views/pages/LoginPage.js";
 import UserPage from "views/pages/UserPage.js";
 import AddPersonPage from "views/pages/AddPersonPage.js";
+import EvaluationsPage from "views/pages/EvaluationsPage.js";
 
 const dashboardRoutes = [
   {
@@ -79,6 +80,14 @@ const dashboardRoutes = [
     icon: Dashboard,
     component: AddPersonPage,
     navbar: false,
+    layout: "/admin"
+  },
+  {
+    path: "/evaluaciones",
+    name: "Evaluaciones",
+    icon: Dashboard,
+    component: EvaluationsPage,
+    navbar: true,
     layout: "/admin"
   },
   {
