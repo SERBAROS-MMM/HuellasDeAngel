@@ -57,7 +57,7 @@ export default function GridPerson({name,lastname1,lastname2,age,image,typeIdent
           </Typography>
         </CardContent>
         <CardContent >   
-          <IconButton onClick={goEvaluations}>
+          <IconButton>
             <SearchIcon /> Evaluaciones
           </IconButton>
           <IconButton >

@@ -4,6 +4,7 @@ export const HTTP_CONSTANTS={
     autologin:'/auth/autologin',
     persons:'/persons/',
     personsfilter:'/persons/filter/',
+    personOneParameterIdent:'/persons/ident/',
     imageUp: '/image/',
     uploadUP: '/upload/'
 }
