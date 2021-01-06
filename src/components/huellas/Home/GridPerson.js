@@ -57,11 +57,11 @@ export default function GridPerson({name,lastname1,lastname2,age,image,typeIdent
           </Typography>
         </CardContent>
         <CardContent >   
-          <IconButton>
-            <SearchIcon /> Detalles
+          <IconButton onClick={goEvaluations}>
+            <SearchIcon /> Evaluaciones
           </IconButton>
           <IconButton >
-            <ModifyIcon /> Modificar
+            <ModifyIcon /> Detalles
           </IconButton>
           <IconButton >
             <AssignmentIcon /> Novedades
