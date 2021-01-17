@@ -88,7 +88,7 @@ export default function UserProfile() {
       const endpoint = HTTP_CONSTANTS.uploadUP
       const response = await requestHttpFile('post',endpoint, data)
      // console.log(response)
-      updatePersonImageURL(inName,imageURL)
+     await updatePersonImageURL(inName,imageURL)
     } catch (err) {
       console.log(err)
     }
