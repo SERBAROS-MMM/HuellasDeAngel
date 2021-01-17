@@ -145,7 +145,7 @@ export default function UserProfile() {
         const ext = HTTP_CONSTANTS.urlUp + HTTP_CONSTANTS.imageUp + response.response._id + path.extname(file.name)
         console.log(ext)
        // setImageURL(ext)
-        sendImage(response.response._id,ext)
+       await sendImage(response.response._id,ext)
        
         redirectHome()
       } else {
