@@ -68,14 +68,14 @@ export default function UserProfile() {
   const [birthday, setBirthday] =useState('')
   const [age, setAge] =useState('')
   const [gender, setGender] =useState('')
-  const [imageURL, setImageURL] =useState('')
+  //const [imageURL, setImageURL] =useState('')
   const [file, setFile] =useState()
   const [typeIdent, setTypeIdent] =useState('')
   const [ident, setIdent] =useState('')
   const [origin, setOrigin] =useState('')
   const [image, setImage] =useState(imgProfile)
 
-  const sendImage = async (inName) =>{
+  const sendImage = async (inName,imageURL) =>{
     try {
     
     const data = new FormData()
@@ -87,8 +87,8 @@ export default function UserProfile() {
     .catch(err=>console.log(err))*/
       const endpoint = HTTP_CONSTANTS.uploadUP
       const response = await requestHttpFile('post',endpoint, data)
-      console.log(response)
-      updatePersonImageURL(inName)
+     // console.log(response)
+      updatePersonImageURL(inName,imageURL)
     } catch (err) {
       console.log(err)
     }
@@ -96,7 +96,6 @@ export default function UserProfile() {
   }
 
   const changeIMG = (fileImage,urlImg) =>{
-    
     setImage(urlImg)
     setFile(fileImage)
   }
@@ -120,14 +119,14 @@ export default function UserProfile() {
     window.location.href = '/admin/login'
   }
 
-  const updatePersonImageURL = async (id) => {
+  const updatePersonImageURL = async (id,imageURL) => {
     try {
       const endpoint = HTTP_CONSTANTS.persons+id
-      console.log(endpoint)
+      
       const data = {
         imageURL
       }
-      console.log(data)
+      console.log("data:",data)
       const response = await requestHttp('put',endpoint,data )
       console.log(response)
       
@@ -142,12 +141,13 @@ export default function UserProfile() {
       const response = await requestHttp('post',endpoint, data)
       console.log(response)
       if (response.status === 201) {
-        
-        const ext = HTTP_CONSTANTS.urlUp + HTTP_CONSTANTS.imageUp+response.response._id+path.extname(file.name)
+        console.log("file img: ",file)
+        const ext = HTTP_CONSTANTS.urlUp + HTTP_CONSTANTS.imageUp + response.response._id + path.extname(file.name)
         console.log(ext)
-        setImageURL(ext)
-        sendImage(response.response._id)
-       // redirectHome()
+       // setImageURL(ext)
+        sendImage(response.response._id,ext)
+       
+        redirectHome()
       } else {
         console.log(response)
       }
@@ -303,6 +303,7 @@ export default function UserProfile() {
                       <option value={10}>Comisaría 1</option>
                       <option value={20}>Comisaría 2</option>
                       <option value={30}>Comisaría 3</option>
+                      <option value={40}>ICBF</option>
                     </NativeSelect>
                   </GridItem>
                   </GridContainer>
