@@ -4,7 +4,7 @@
   "description": "App para la gestion de la fundacion Huellas de Angel",
   "main": "index.js",
   "dependencies": {
-    "@material-ui/core": "4.10.0",
+    "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "4.9.1",
     "axios": "^0.21.0",
     "browser-image-compression": "^1.0.13",

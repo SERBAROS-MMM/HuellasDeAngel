@@ -6,7 +6,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import PshycologicalEvaluation from 'components/huellas/Evaluations/PhysologicalEvaluation';
+import TabEvaluation from 'components/huellas/Evaluations/TabEvaluation';
+import {EVALUATIONS} from './../../data/example'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,6 +59,7 @@ export default function EvaluationsPage() {
   };
 
   return (
+    
     <div className={classes.root}>
       <AppBar position="static" color="default">
         <Tabs
@@ -69,36 +71,20 @@ export default function EvaluationsPage() {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          <Tab label="Psicológica" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
-          <Tab label="Item Four" {...a11yProps(3)} />
-          <Tab label="Item Five" {...a11yProps(4)} />
-          <Tab label="Item Six" {...a11yProps(5)} />
-          <Tab label="Item Seven" {...a11yProps(6)} />
+       { EVALUATIONS.map((item,key)=>
+          <Tab label= {item.nombreEvaluacion} {...a11yProps(key)} />
+          )
+          }
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <PshycologicalEvaluation/>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
-      </TabPanel>
-    </div>
+      { 
+          EVALUATIONS.map((item,key)=>
+          <TabPanel value={value} index={key}>
+            <TabEvaluation Pasos = {item.Pasos}/>
+          </TabPanel> 
+          )
+          }
+      </div>
+      
   );
 }
