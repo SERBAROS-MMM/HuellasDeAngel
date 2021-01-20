@@ -9,7 +9,11 @@ import CardBody from "components/huellas/Person/CardBody.js";
 import TextField from '@material-ui/core/TextField';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Card from "components/huellas/Person/Card.js";
-import CardHeader from "components/huellas/Person/CardHeader.js";
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((styles) => ({
   cardCategoryWhite: {
@@ -53,13 +57,26 @@ const useStyles = makeStyles((styles) => ({
 export default function UserData({name,lastName1,lastName2,ident,birthday,age,typeIdent,gender,origin}) {
   const classes = useStyles();
 
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+  
   return (
     <div>
-      <Card>
-        <CardHeader color="primary">
-          <h6 className={classes.cardTitleWhite}>Datos Básicos</h6>
-        </CardHeader>             
-                <CardBody>
+      
+      <ExpansionPanel expanded={expanded === 'panelDatosBasicos'} onChange={handleChange('panelDatosBasicos')}>
+                 <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls={"panelDatosBasicosbh-content"}
+                    id={"panelDatosBasicosbh-header"}
+        >
+          <Typography className={classes.heading}>Datos básicos</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+        <Card>
+        <CardBody>
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={4}>
                       <TextField
@@ -178,8 +195,10 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
                   </GridItem>
                   </GridContainer>
                 </CardBody>
-                
-      </Card>
+                </Card>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+
     </div>
   );
 }
