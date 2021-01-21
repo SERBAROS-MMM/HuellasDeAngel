@@ -62,12 +62,12 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  
+
   return (
     <div>
       
       <ExpansionPanel expanded={expanded === 'panelDatosBasicos'} onChange={handleChange('panelDatosBasicos')}>
-                 <ExpansionPanelSummary
+          <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls={"panelDatosBasicosbh-content"}
                     id={"panelDatosBasicosbh-header"}
@@ -82,6 +82,7 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
                       <TextField
                         label="Nombre"
                         id="name"
+                        disabled='true'
                         value ={name}
                         fullWidth
                         margin="normal"
@@ -91,6 +92,7 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
                       <TextField
                         label="1er. Apellido"
                         id="lastname1"
+                        disabled='true'
                         value ={lastName1}
                         fullWidth
                         margin="normal"
@@ -100,6 +102,7 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
                       <TextField
                        label="2do. Apellido"
                        id="lastname2"
+                       disabled='true'
                        value ={lastName2}
                        fullWidth
                        margin="normal"
@@ -111,6 +114,7 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
                       <TextField
                         label="No. Identificacion"
                         id="ident"
+                        disabled='true'
                         value ={ident}
                         fullWidth
                         margin="normal"
@@ -120,6 +124,7 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
                       <TextField
                         label="Fecha de nacimiento"
                         id="birthday"
+                        disabled='true'
                         value ={birthday}
                         fullWidth
                         margin="normal"                        
@@ -129,6 +134,7 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
                     <TextField
                       label="Edad"
                       id="age"
+                      disabled='true'
                       fullWidth
                       margin="normal"
                       value ={age}
@@ -142,7 +148,8 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
                     </InputLabel>
                     <NativeSelect
                       value={typeIdent}
-                      fullWidth                     
+                      fullWidth 
+                      disabled='true'                    
                       inputProps={{
                         name: 'tipoIdentificacion',
                         id: 'tipoIdentificacion',
@@ -163,6 +170,7 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
                     <NativeSelect
                       value={gender}
                       fullWidth
+                      disabled='true'
                       margin="normal"
                       inputProps={{
                         name: 'gender',
@@ -182,6 +190,7 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
                       value={origin}
                       margin="normal"
                       fullWidth
+                      disabled='true'
                       inputProps={{
                         name: 'origin',
                         id: 'origin',
