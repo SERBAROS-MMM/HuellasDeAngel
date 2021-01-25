@@ -57,7 +57,7 @@ const useStyles = makeStyles((styles) => ({
 export default function UserData({name,lastName1,lastName2,ident,birthday,age,typeIdent,gender,origin}) {
   const classes = useStyles();
 
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);

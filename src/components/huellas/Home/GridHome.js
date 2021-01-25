@@ -21,10 +21,10 @@ const classes = styles;
 
 return (
 <div className={classes.contentWrapper}>
-        <GridList className={classes.gridList} cellHeight={'auto'} cols={1} >
+        <GridList className={classes.gridList} cellHeight={'auto'}  cols={1} >
             {                
               persons.map((item,key)=>
-                    <GridPerson 
+                    <GridPerson
                       key={key} 
                       name={item.name} 
                       lastname1={item.lastName1} 
@@ -33,7 +33,8 @@ return (
                       ident={item.ident} 
                       typeIdent={item.typeIdent} 
                       gender={item.gender} 
-                      image = {item.imageURL} />
+                      image = {item.imageURL}
+                      fromSite = {item.fromSite.name} />
                 )
             }            
         </GridList>

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -62,6 +62,11 @@ const useStyles = makeStyles((styles) => ({
 export default function UserProfile() {
   const classes = useStyles();
   
+  useEffect(() => {
+    getListFromSites()
+    return () => {}
+  }, [])
+
   const [name, setName] =useState('')
   const [lastName1, setLastName1] =useState('')
   const [lastName2, setLastName2] =useState('')
@@ -72,7 +77,8 @@ export default function UserProfile() {
   const [file, setFile] =useState()
   const [typeIdent, setTypeIdent] =useState('')
   const [ident, setIdent] =useState('')
-  const [origin, setOrigin] =useState('')
+  const [fromSite, setFromSite] =useState('')
+  const [fromSiteList, setFromSiteList] =useState([])
   const [image, setImage] =useState(imgProfile)
 
   const sendImage = async (inName,imageURL) =>{
@@ -86,7 +92,7 @@ export default function UserProfile() {
     .then(res =>console.log(res))
     .catch(err=>console.log(err))*/
       const endpoint = HTTP_CONSTANTS.uploadUP
-      const response = await requestHttpFile('post',endpoint, data)
+      await requestHttpFile('post',endpoint, data)
      // console.log(response)
      await updatePersonImageURL(inName,imageURL)
     } catch (err) {
@@ -111,6 +117,7 @@ export default function UserProfile() {
       gender,
       typeIdent,
       ident,
+      fromSite
     }
     addPersonRequest(data)    
   }
@@ -156,6 +163,21 @@ export default function UserProfile() {
       console.log(err)
       
     }
+  }
+
+  const getListFromSites = async () =>{
+    try {
+
+      const endpoint = HTTP_CONSTANTS.fromSites
+      const response = await requestHttp('get',endpoint)
+      if (response.status === 200) {
+        
+        setFromSiteList (response.response)
+      } 
+    }
+    catch (err) {
+    console.log(err)
+    } 
   }
 
   return (
@@ -281,8 +303,8 @@ export default function UserProfile() {
                       }}
                     >
                       <option value="">Elegir..</option>
-                      <option value={'Mas'}>Masculino</option>
-                      <option value={'Fem'}>Femenino</option>
+                      <option value={'MAS'}>Masculino</option>
+                      <option value={'FEM'}>Femenino</option>
                     </NativeSelect>
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>                  
@@ -290,20 +312,20 @@ export default function UserProfile() {
                       Lugar Origen
                     </InputLabel>
                     <NativeSelect
-                      value={origin}
-                      onChange={(e) => setOrigin(e.target.value)}
+                      value={fromSite}
+                      onChange={(e) => setFromSite(e.target.value)}
                       margin="normal"
                       fullWidth
                       inputProps={{
-                        name: 'origin',
-                        id: 'origin',
+                        name: 'fromSite',
+                        id: 'fromSite',
                       }}
                     >
-                      <option value="">No aplica</option>
-                      <option value={10}>Comisaría 1</option>
-                      <option value={20}>Comisaría 2</option>
-                      <option value={30}>Comisaría 3</option>
-                      <option value={40}>ICBF</option>
+                      {
+                        fromSiteList.map((item,key)=> 
+                        <option value={item._id} key={key}>{item.name}</option>
+                        )
+                      }
                     </NativeSelect>
                   </GridItem>
                   </GridContainer>

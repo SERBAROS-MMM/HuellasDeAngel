@@ -15,8 +15,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import Paper from '@material-ui/core/Paper';
 import UserData from "components/huellas/Evaluations/UserData"
-import GridItem from "components/huellas/Person/GridItem.js";
-import GridContainer from "components/huellas/Person/GridContainer.js";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
-    width: 'auto',
+   
   },
   iconButton: {
     padding: 10,
@@ -104,8 +103,8 @@ export default function EvaluationsPage() {
     
     <div className={classes.root}>
 
-              <Paper className={classes.rootP}>
-              <InputBase
+              <Paper className={classes.rootP} xs={12} sm={6} md={4}>
+              <InputBase 
                 className={classes.input}
                 placeholder="Identificación"                  
                 value={ident}

@@ -10,5 +10,7 @@ export const HTTP_CONSTANTS={
     personsfilter:'persons/filter/',
     personOneParameterIdent:'persons/ident/',
     imageUp: '/image/',
-    uploadUP: '/upload/'
+    uploadUP: '/upload/',
+    fromSites: 'params/fromSite/',
+    indicadores: 'count/'
 }
