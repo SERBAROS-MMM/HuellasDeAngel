@@ -5,7 +5,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpasionPanelPaso from './ExpasionPanelPaso';
+import ExpasionPanelStep from './ExpasionPanelStep';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TabEvaluation({Pasos = []}) {
+export default function TabEvaluation({Steps = []}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -33,18 +33,18 @@ export default function TabEvaluation({Pasos = []}) {
   return (
     <div className={classes.root}>
         {
-             Pasos.map((item,key)=>
+             Steps.map((item,key)=>
              <ExpansionPanel expanded={expanded === 'panel'+key} onChange={handleChange('panel'+key)}>
                  <ExpansionPanelSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls={"panel"+key+"bh-content"}
                     id={"panel"+key+"bh-header"}
         >
-          <Typography className={classes.heading}>{item.nombrePaso}</Typography>
+          <Typography className={classes.heading}>{item.nameStep}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            <ExpasionPanelPaso Campos ={item.campos}/>
+            <ExpasionPanelStep Fields ={item.Fields}/>
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -11,6 +11,8 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import ModifyIcon from '@material-ui/icons/Edit';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import { Link } from 'react-router-dom'
+import {PersonSelectedContext} from './../../../contexts/PersonSelectedContext'
 
 const useStyles = makeStyles((theme) => ({
  
@@ -20,9 +22,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function GridPerson({name,lastname1,lastname2,age,image,typeIdent,ident,gender,fromSite}) {
-  const classes = useStyles();
 
+export default function GridPerson({_id,name,lastname1,lastname2,age,image,typeIdent,ident,gender,fromSite}) {
+  const classes = useStyles();
+  const {setPersonSelected } = useContext(PersonSelectedContext)
+  useEffect(() => {
+    setPersonSelected({_id,name,lastname1,lastname2,age,image,typeIdent,ident,gender,fromSite}) 
+    return () => {
+    }
+    // eslint-disable-next-line
+  }, [])
+  
  
   return (
   <div >
@@ -56,10 +66,16 @@ export default function GridPerson({name,lastname1,lastname2,age,image,typeIdent
               Lorem ipsum dolor sit amet,<br></br> consectetur adipisicing elit. 
           </Typography>
         </CardContent>
-        <CardContent >   
-          <IconButton>
+        <CardContent >  
+          <Link 
+          to={{
+            pathname: '/admin/evaluaciones',
+            state: {ident}
+          }}>
+          <IconButton >
             <SearchIcon /> Evaluaciones
           </IconButton>
+          </Link> 
           <IconButton >
             <ModifyIcon /> Detalles
           </IconButton>

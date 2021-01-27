@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect,useContext} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import TabEvaluation from 'components/huellas/Evaluations/TabEvaluation';
-import {EVALUATIONS} from './../../data/example'
+//import {EVALUATIONS} from './../../data/example'
 import {HTTP_CONSTANTS} from '../../config/http-constants'
 import {requestHttp} from './../../config/http-server'
 import IconButton from '@material-ui/core/IconButton';
@@ -15,7 +15,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import Paper from '@material-ui/core/Paper';
 import UserData from "components/huellas/Evaluations/UserData"
-
+import {PersonSelectedContext} from './../../contexts/PersonSelectedContext'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -71,9 +71,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EvaluationsPage() {
+export default function EvaluationsPage({location={state:{ident:''}}}) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+
+  const {setPersonSelected,personSelected } = useContext(PersonSelectedContext)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -84,20 +86,54 @@ export default function EvaluationsPage() {
   const [bandera, setBandera] = useState(false)
 
   const [personResult, setPersonResult] = useState({})
+  const [evaluationsResult, setEevaluationsResult] = useState({})
 
   const findPersonIdent=async()=>{ 
+    if (ident!==''){
     const endpoint=HTTP_CONSTANTS.personOneParameterIdent+ident
     const response=await requestHttp('get',endpoint)
-    console.log(response)
     if (response.response!==null) {
     setPersonResult(response.response)
+    setPersonSelected(response.response)
     setBandera(true)
     }
     else {
-      setIdent('')
+      setIdent(personSelected.ident)
       setBandera(false)
     }
+    } else{
+    if (location.state.ident!==''){
+      const endpoint=HTTP_CONSTANTS.personOneParameterIdent+location.state.ident
+      const response=await requestHttp('get',endpoint)
+      if (response.response!==null) {
+      setPersonResult(response.response)
+      setPersonSelected(response.response)
+      setBandera(true)
+      }
+      else {
+        setIdent(personSelected.ident)
+        setBandera(false)
+      }
+    }
   }
+}
+
+  const getEvaluations=async()=>{ 
+    const endpoint=HTTP_CONSTANTS.evaluations
+    const response=await requestHttp('get',endpoint)
+    if (response.response!==null) {
+      setEevaluationsResult(response.response)
+    }
+  }
+
+  useEffect(() => {
+    
+    findPersonIdent()
+    getEvaluations()
+    return () => {
+    }
+    // eslint-disable-next-line 
+  }, [])
 
   return (
     
@@ -126,7 +162,7 @@ export default function EvaluationsPage() {
               age={personResult.age}
               typeIdent={personResult.typeIdent}
               gender={personResult.gender}
-              origin={personResult.origin}
+              fromSite={personResult.fromSite}
             />
             <AppBar position="static" color="default">
         <Tabs
@@ -138,16 +174,16 @@ export default function EvaluationsPage() {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-       { EVALUATIONS.map((item,key)=>
-          <Tab label= {item.nombreEvaluacion} {...a11yProps(key)} />
+       { evaluationsResult.map((item,key)=>
+          <Tab label= {item.nameEvaluation} {...a11yProps(key)} />
           )
           }
         </Tabs>
       </AppBar>
       { 
-          EVALUATIONS.map((item,key)=>
+          evaluationsResult.map((item,key)=>
           <TabPanel value={value} index={key}>
-            <TabEvaluation Pasos = {item.Pasos}/>
+            <TabEvaluation Steps = {item.Steps}/>
           </TabPanel> 
           )
           }</>: <>

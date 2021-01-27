@@ -35,303 +35,374 @@ export const BOYS = [
 
 export const EVALUATIONS = [
 
-    {   id : 0,
-		nombreEvaluacion: 'Psicologica',
-		Pasos: [ 
+    {   _id: "0",
+        nameEvaluation:"Psicologica",
+		Steps: [ 
             {
-                nombrePaso: 'Datos Basico Adicionales',
-                campos : [{ 
-                nombreCampo:'Fecha Valoracion' ,
-                typeCampo: 'Date'	
+                nameStep: "Datos Basico Adicionales",
+                orderStep: 1,
+                Fields : [{ 
+                    nameField:"Fecha Valoracion" ,
+                    typeField: "Date"	,
+                    orderField:1
                 }
                 ]
             },
             {
-					nombrePaso: 'Motivo Ingreso',
-					campos : [{ 
-                        nombreCampo:'Motivo referido en la ficha de ingreso' ,
-                        typeCampo: 'Text'	
-                    },
-                    { 
-                        nombreCampo: 'Referido por el Usuario',
-                        typeCampo: 'Text'									
+				nameStep: "Motivo Ingreso",
+                orderStep: 2,
+				Fields : [{ 
+                    nameField:"Motivo referido en la ficha de ingreso" ,
+                    typeField: "Text"	,
+                    orderField:1
+                },
+                { 
+                        nameField: "Referido por el Usuario",
+                        typeField: "Text",
+                        orderField:2									
                     }
                     ]
                     },
                  {
-					nombrePaso: 'Examen Mental',
-					campos : [{ 
-                                nombreCampo:'Porte y actitud' ,	
-                                typeCampo: 'Text'	
+					nameStep: "Examen Mental",
+                    orderStep:3,
+					Fields : [{ 
+                                nameField:"Porte y actitud" ,	
+                                typeField: "Text"	,
+                                orderField:1
 							},
 							{ 
-                                nombreCampo: 'Atención',
-                                typeCampo: 'Text'								
+                                nameField: "Atención",
+                                typeField: "Text"			,
+                                orderField:2					
 							},
 							{ 
-                                nombreCampo: 'Conciencia' ,
-                                typeCampo: 'Text'	
+                                nameField: "Conciencia" ,
+                                typeField: "Text"	,
+                                orderField:3
 							},
 							{ 
-                                nombreCampo: 'Orientación' ,
-                                typeCampo: 'Text'	
+                                nameField: "Orientación" ,
+                                typeField: "Text"	,
+                                orderField:4
 							},
 							{ 
-                                nombreCampo: 'Sensopercepción' ,
-                                typeCampo: 'Text'	
+                                nameField: "Sensopercepción" ,
+                                typeField: "Text"	,
+                                orderField:5
 							},
 							{ 
-                                nombreCampo: 'Memoria' ,
-                                typeCampo: 'Text'	
+                                nameField: "Memoria" ,
+                                typeField: "Text"	,
+                                orderField:6
 							},
 							{ 
-                                nombreCampo: 'Lenguaje' ,
-                                typeCampo: 'Text'	
+                                nameField: "Lenguaje" ,
+                                typeField: "Text"	,
+                                orderField:7
 							},
 							{ 
-                                nombreCampo: 'Pensamiento' ,
-                                typeCampo: 'Text'	
+                                nameField: "Pensamiento" ,
+                                typeField: "Text"	,
+                                orderField:8
 							},
 							{ 
-                                nombreCampo: 'Afecto' ,
-                                typeCampo: 'Text'	
+                                nameField: "Afecto" ,
+                                typeField: "Text"	,
+                                orderField:9
 							},
 							{ 
-                                nombreCampo: 'Juicio' ,
-                                typeCampo: 'Text'	
+                                nameField: "Juicio" ,
+                                typeField: "Text"	,
+                                orderField:10
 							},
 							{ 
-                                nombreCampo: 'Prospección' ,
-                                typeCampo: 'Text'	
+                                nameField: "Prospección" ,
+                                typeField: "Text"	,
+                                orderField:11
 							},
 							{ 
-                                nombreCampo: 'Sueño' ,
-                                typeCampo: 'Text'	
-							},
+                                nameField: "Sueño" ,
+                                typeField: "Text"	,
+                                orderField:12
+							}
 						]
                 },
                 {
-					nombrePaso: 'Historia Personal y Familiar',
-					campos : [{ 
-                        nombreCampo:'' ,
-                        typeCampo: 'Text'	
+					nameStep: "Historia Personal y Familiar",
+                    orderStep:4,
+					Fields : [{ 
+                        nameField:"" ,
+                        typeField: "Text"	,
+                        orderField:1
                     }
                     ]
                 },
                 {
-					nombrePaso: 'Antecedentes',
-					campos : [{ 
-                        nombreCampo:'' ,
-                        typeCampo: 'Text'	
+					nameStep: "Antecedentes",
+                    orderStep: 5,
+					Fields : [{ 
+                        nameField:"" ,
+                        typeField: "Text"	,
+                        orderField:1
                     }
                     ]
                 },
                 {
-					nombrePaso: 'Valoración por áreas',
-					campos : [{ 
-                        nombreCampo:'Área Cognitiva / adaptativa',
-                        typeCampo: 'Text'	
+					nameStep: "Valoración por áreas",
+                    orderStep:6,
+					Fields : [{ 
+                        nameField:"Área Cognitiva / adaptativa",
+                        typeField: "Text"	,
+                        orderField:1
                     },
                     { 
-                        nombreCampo:'Área Emocional / Afectiva',
-                        typeCampo: 'Text'	
+                        nameField:"Área Emocional / Afectiva",
+                        typeField: "Text"	,
+                        orderField:1
                     },
                     { 
-                        nombreCampo:'Área Sensorio-motriz',
-                        typeCampo: 'Text'	
+                        nameField:"Área Sensorio-motriz",
+                        typeField: "Text"	,
+                        orderField:1
                     },
                     { 
-                        nombreCampo:'Área del Lenguaje',
-                        typeCampo: 'Text'	
+                        nameField:"Área del Lenguaje",
+                        typeField: "Text"	,
+                        orderField:1
                     }
                     ]
                 },
                 {
-					nombrePaso: 'Hipótesis Diagnóstica',
-					campos : [{ 
-                        nombreCampo:'' ,
-                        typeCampo: 'Text'	
+					nameStep: "Hipótesis Diagnóstica",
+                    orderStep: 7,
+					Fields : [{ 
+                        nameField:"" ,
+                        typeField: "Text"	,
+                        orderField:1
                     }
                     ]
                 },
                 {
-					nombrePaso: 'Recomendaciones',
-					campos : [{ 
-                        nombreCampo:'' ,
-                        typeCampo: 'Text'	
+					nameStep: "Recomendaciones",
+                    orderStep: 8,
+					Fields : [{ 
+                        nameField:"" ,
+                        typeField: "Text"	,
+                        orderField:1
                     }
                     ]
-                },
+                }
             ]								
     },
     {
-        id : 1,
-		nombreEvaluacion: 'Enfermería',
-		Pasos: [ {
-					nombrePaso: 'Datos Basico Adicionales',
-					campos : [{ 
-                        nombreCampo:'Fecha Valoracion' ,
-                        typeCampo: 'Date'	
+        _id : "1",
+		nameEvaluation: 'Enfermería',
+		Steps: [ {
+                    nameStep: 'Datos Basico Adicionales',
+                    orderStep: 1,
+					Fields : [{ 
+                        nameField:'Fecha Valoracion' ,
+                        typeField: 'Date'	,
+                        orderField:1
                     }
                     ]
                     },
                  {
-					nombrePaso: 'Examen Fisico',
-					campos : [{ 
-                                nombreCampo:'Condiciones Generales' ,	
-                                typeCampo: 'Text'
+					nameStep: 'Examen Fisico',
+					Fields : [{ 
+                                nameField:'Condiciones Generales' ,	
+                                typeField: 'Text',
+                                orderField:1
 							},
 							{ 
-                                nombreCampo: 'Cabeza',	
-                                typeCampo: 'Input'							
+                                nameField: 'Cabeza',	
+                                typeField: 'Input'		,
+                                orderField:2					
 							},
 							{ 
-                                nombreCampo: 'Cuello' ,
-                                typeCampo: 'Input'
+                                nameField: 'Cuello' ,
+                                typeField: 'Input',
+                                orderField:3
 							},
 							{ 
-                                nombreCampo: 'Cardiovascular' ,
-                                typeCampo: 'Input'
+                                nameField: 'Cardiovascular' ,
+                                typeField: 'Input',
+                                orderField:4
 							},
 							{ 
-                                nombreCampo: 'Abdomen' ,
-                                typeCampo: 'Input'
+                                nameField: 'Abdomen' ,
+                                typeField: 'Input',
+                                orderField:5
 							},
 							{ 
-                                nombreCampo: 'Extremidades' ,
-                                typeCampo: 'Input'
+                                nameField: 'Extremidades' ,
+                                typeField: 'Input',
+                                orderField:6
 							},
 							{ 
-                                nombreCampo: 'Peso' ,
-                                typeCampo: 'Input'
+                                nameField: 'Peso' ,
+                                typeField: 'Input',
+                                orderField:7
 							},
 							{ 
-                                nombreCampo: 'Talla' ,
-                                typeCampo: 'Input'
+                                nameField: 'Talla' ,
+                                typeField: 'Input',
+                                orderField:8
 							},
 							{ 
-                                nombreCampo: 'T/A' ,
-                                typeCampo: 'Input'
+                                nameField: 'T/A' ,
+                                typeField: 'Input',
+                                orderField:9
 							},
 							{ 
-                                nombreCampo: 'FC' ,
-                                typeCampo: 'Input'
+                                nameField: 'FC' ,
+                                typeField: 'Input',
+                                orderField:10
 							},
 							{ 
-                                nombreCampo: 'FR' ,
-                                typeCampo: 'Input'
+                                nameField: 'FR' ,
+                                typeField: 'Input',
+                                orderField:11
 							},
 							{ 
-                                nombreCampo: 'Cardiovascular' ,
-                                typeCampo: 'T'
+                                nameField: 'Cardiovascular' ,
+                                typeField: 'T',
+                                orderField:12
 							},
 						]
 				},
                 {
-					nombrePaso: 'Observaciones',
-					campos : [{ 
-                        nombreCampo:'' ,
-                        typeCampo: 'Text'	
+                    nameStep: 'Observaciones',
+                    orderStep: 2,
+					Fields : [{ 
+                        nameField:'' ,
+                        typeField: 'Text'	,
+                        orderField:1
                     }
                     ]
                 }]								
     },
     {
         id : 2,
-		nombreEvaluacion: 'Sociofamiliar',
-		Pasos: [ {
-					nombrePaso: 'Datos Basico Adicionales',
-					campos : [{ 
-                        nombreCampo:'Fecha Valoracion' ,
-                        typeCampo: 'Date'	
+		nameEvaluation: 'Sociofamiliar',
+		Steps: [ {
+                    nameStep: 'Datos Basico Adicionales',
+                    orderStep: 1,
+					Fields : [{ 
+                        nameField:'Fecha Valoracion' ,
+                        typeField: 'Date'	,
+                        orderField:1
                     },
                     { 
-                        nombreCampo:'Dirección' ,
-                        typeCampo: 'Input'	
+                        nameField:'Dirección' ,
+                        typeField: 'Input'	,
+                        orderField:2
                     },
                     { 
-                        nombreCampo:'Escolaridad' ,
-                        typeCampo: 'Input'	
+                        nameField:'Escolaridad' ,
+                        typeField: 'Input'	,
+                        orderField:3
                     },
                     { 
-                        nombreCampo:'Tipo de afiliación a salud y EPS' ,
-                        typeCampo: 'Input'	
+                        nameField:'Tipo de afiliación a salud y EPS' ,
+                        typeField: 'Input'	,
+                        orderField:4
                     },
                     { 
-                        nombreCampo:'Número de hermanos' ,
-                        typeCampo: 'Input'	
+                        nameField:'Número de hermanos' ,
+                        typeField: 'Input'	,
+                        orderField:5
                     },
                     { 
-                        nombreCampo:'Hijo número' ,
-                        typeCampo: 'Input'	
+                        nameField:'Hijo número' ,
+                        typeField: 'Input'	,
+                        orderField:6
                     },
                     { 
-                        nombreCampo:'Idioma/dialecto' ,
-                        typeCampo: 'Input'	
+                        nameField:'Idioma/dialecto' ,
+                        typeField: 'Input'	,
+                        orderField:7
                     },
                     { 
-                        nombreCampo:'Grupo étnico' ,
-                        typeCampo: 'Input'	
+                        nameField:'Grupo étnico' ,
+                        typeField: 'Input'	,
+                        orderField:8
                     },
                     { 
-                        nombreCampo:'Persona o familiar de contacto' ,
-                        typeCampo: 'Input'	
+                        nameField:'Persona o familiar de contacto' ,
+                        typeField: 'Input'	,
+                        orderField:9
                     },
                     { 
-                        nombreCampo:'Teléfono' ,
-                        typeCampo: 'Input'	
+                        nameField:'Teléfono' ,
+                        typeField: 'Input'	,
+                        orderField:10
                     }
                     ]
                     },
                  {
-					nombrePaso: 'Composición familiar',
-					campos : [{ 
-                                nombreCampo:'' ,	
-                                typeCampo: 'Text'
+                    nameStep: 'Composición familiar',
+                    orderStep: 2,
+					Fields : [{ 
+                                nameField:'' ,	
+                                typeField: 'Text',
+                                orderField:1
 							}
 						]
 				},
                 {
-					nombrePaso: 'Genograma familiar',
-					campos : [{ 
-                        nombreCampo:'',
-                        typeCampo: 'Input'	
+                    nameStep: 'Genograma familiar',
+                    orderStep: 3,
+					Fields : [{ 
+                        nameField:'',
+                        typeField: 'Input'	,
+                        orderField:1
                     }
                     ]
                 },
                 {
-					nombrePaso: 'Situaciones de vulneración de derechos identificadas al ingreso familiar',
-					campos : [{ 
-                        nombreCampo:'',
-                        typeCampo: 'Text'	
+                    nameStep: 'Situaciones de vulneración de derechos identificadas al ingreso familiar',
+                    orderStep: 4,
+					Fields : [{ 
+                        nameField:'',
+                        typeField: 'Text'	,
+                        orderField:1
                     }
                     ]
                 },
                 {
-                   nombrePaso: 'Factores de vulnerabilidad y generatividad',
-                   campos : [{ 
-                               nombreCampo:'Factores de Vulnerabilidad' ,	
-                               typeCampo: 'Text'
+                   nameStep: 'Factores de vulnerabilidad y generatividad',
+                   orderStep: 5,
+                   Fields : [{ 
+                               nameField:'Factores de Vulnerabilidad' ,	
+                               typeField: 'Text',
+                               orderField:1
                            },
                            { 
-                            nombreCampo:'Factores de Generatividad' ,	
-                            typeCampo: 'Text'
+                            nameField:'Factores de Generatividad' ,	
+                            typeField: 'Text',
+                            orderField:2
                         }
                        ]
                },
                {
-                   nombrePaso: 'Observación diagnóstica',
-                   campos : [{ 
-                       nombreCampo:'',
-                       typeCampo: 'Text'	
+                   nameStep: 'Observación diagnóstica',
+                   orderStep: 6,
+                   Fields : [{ 
+                       nameField:'',
+                       typeField: 'Text'	,
+                       orderField:1
                    }
                    ]
                },
                {
-                   nombrePaso: 'Recomendaciones',
-                   campos : [{ 
-                       nombreCampo:'',
-                       typeCampo: 'Text'	
+                   nameStep: 'Recomendaciones',
+                   orderStep: 7,
+                   Fields : [{ 
+                       nameField:'',
+                       typeField: 'Text'	,
+                       orderField:1
                    }
                    ]
                }

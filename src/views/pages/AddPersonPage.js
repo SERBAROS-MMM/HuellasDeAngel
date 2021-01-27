@@ -144,6 +144,7 @@ export default function UserProfile() {
 
   const addPersonRequest = async (data) => {
     try {
+      console.log(data)
       const endpoint = HTTP_CONSTANTS.persons
       const response = await requestHttp('post',endpoint, data)
       console.log(response)
@@ -321,6 +322,7 @@ export default function UserProfile() {
                         id: 'fromSite',
                       }}
                     >
+                       <option value="">Elegir..</option>
                       {
                         fromSiteList.map((item,key)=> 
                         <option value={item._id} key={key}>{item.name}</option>

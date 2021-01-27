@@ -19,6 +19,7 @@ const styles = (theme) => ({
 const GridHome=({persons}) => {
 const classes = styles;
 
+
 return (
 <div className={classes.contentWrapper}>
         <GridList className={classes.gridList} cellHeight={'auto'}  cols={1} >
@@ -26,6 +27,7 @@ return (
               persons.map((item,key)=>
                     <GridPerson
                       key={key} 
+                      _id = {item._id}
                       name={item.name} 
                       lastname1={item.lastName1} 
                       lastname2={item.lastName2} 
@@ -34,7 +36,8 @@ return (
                       typeIdent={item.typeIdent} 
                       gender={item.gender} 
                       image = {item.imageURL}
-                      fromSite = {item.fromSite.name} />
+                      fromSite = {item.fromSite.name} 
+                      />
                 )
             }            
         </GridList>

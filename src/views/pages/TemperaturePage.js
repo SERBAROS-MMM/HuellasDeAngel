@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import {HTTP_CONSTANTS} from './../../config/http-constants'
 import {requestHttp} from './../../config/http-server'
-import UserTable from 'components/huellas/Temperature/UserTable'
+import TemperatureTable from 'components/huellas/Temperature/TemperatureTable'
 import GridItem from "components/dashboard/Grid/GridItem.js";
 
 
@@ -110,7 +110,7 @@ const TemperaturePage=(props)=> {
             </Grid>
         </Toolbar>
       </AppBar>     
-     {existPersons && <UserTable persons={persons}/>}
+     {existPersons && <TemperatureTable persons={persons}/>}
     </Paper>
   );
 }

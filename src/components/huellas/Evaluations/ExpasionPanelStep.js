@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ExpasionPanelPaso({Campos = []}) {
+export default function ExpasionPanelStep({Fields = []}) {
   const classes = useStyles();
 
   return (
@@ -28,12 +28,12 @@ export default function ExpasionPanelPaso({Campos = []}) {
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           { 
-          Campos.map((item,key) => {              
-            switch (item.typeCampo) {
+          Fields.map((item,key) => {              
+            switch (item.typeField) {
               case 'Text': return(
                 <TextField
-                  label={item.nombreCampo}
-                  id={key}
+                  label={item.nameField}
+                  id={item.nameField}
                   fullWidth
                   margin="normal"
                   multiline
@@ -43,8 +43,8 @@ export default function ExpasionPanelPaso({Campos = []}) {
               )
               case 'Input': return(
                 <TextField
-                  label={item.nombreCampo}
-                  id={key}
+                  label={item.nameField}
+                  id={item.nameField}
                   fullWidth
                   margin="normal"
                   variant="outlined"
@@ -52,8 +52,8 @@ export default function ExpasionPanelPaso({Campos = []}) {
               )
               case 'Date': return(
                 <TextField
-                  label={item.nombreCampo}
-                  id={key}                   
+                  label={item.nameField}
+                  id={item.nameField}                   
                   type="date"
                   fullWidth
                   InputLabelProps={{
@@ -64,7 +64,7 @@ export default function ExpasionPanelPaso({Campos = []}) {
               )
               default : return(
               <>
-                {"Tipo campo no definido"}
+                {"Tipo Field no definido"}
               </>
               )
             }

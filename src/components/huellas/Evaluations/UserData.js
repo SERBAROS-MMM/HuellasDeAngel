@@ -1,13 +1,11 @@
 import React,{useState} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "components/huellas/Person/GridItem.js";
 import GridContainer from "components/huellas/Person/GridContainer.js";
 import CardBody from "components/huellas/Person/CardBody.js";
 import TextField from '@material-ui/core/TextField';
-import NativeSelect from '@material-ui/core/NativeSelect';
 import Card from "components/huellas/Person/Card.js";
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -54,7 +52,7 @@ const useStyles = makeStyles((styles) => ({
   }
 }));
 
-export default function UserData({name,lastName1,lastName2,ident,birthday,age,typeIdent,gender,origin}) {
+export default function UserData({name,lastName1,lastName2,ident,birthday,age,typeIdent,gender,fromSite}) {
   const classes = useStyles();
 
   const [expanded, setExpanded] = useState(false);
@@ -62,6 +60,7 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
 
   return (
     <div>
@@ -143,64 +142,38 @@ export default function UserData({name,lastName1,lastName2,ident,birthday,age,ty
                     </GridContainer>
                     <GridContainer style={{textAlign: 'left',marginTop:'16px'}}>
                   <GridItem xs={12} sm={12} md={4} >
-                    <InputLabel shrink htmlFor="tipoIdentificacion">
-                      Tipo Identificacion
-                    </InputLabel>
-                    <NativeSelect
-                      value={typeIdent}
-                      fullWidth 
-                      disabled='true'                    
-                      inputProps={{
-                        name: 'tipoIdentificacion',
-                        id: 'tipoIdentificacion',
-                      }}
-                    >
-                      <option value="">Seleccionar</option>
-                      <option value={'RC'}>Registro Civil</option>
-                      <option value={'TI'}>Tarjeta Identidad</option>
-                      <option value={'CC'}>Cedula Ciudadania</option>
-                      <option value={'PA'}>Pasaporte</option>
-                    </NativeSelect>
-                      
+                    <TextField
+                        label=" Tipo Identificacion"
+                        id="gender"
+                        disabled='true'
+                        value ={typeIdent==='RC'?'Registro Civil':(
+                                typeIdent==='TI'?'Tarjeta Identidad':(
+                                typeIdent==='CC'?'Cedula Ciudadania':(
+                                typeIdent==='PA'?'Pasaporte':('No Definido')
+                        )))}
+                        fullWidth
+                        margin="normal"
+                      />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>                
-                    <InputLabel shrink htmlFor="gender">
-                      Sexo
-                    </InputLabel>
-                    <NativeSelect
-                      value={gender}
-                      fullWidth
-                      disabled='true'
-                      margin="normal"
-                      inputProps={{
-                        name: 'gender',
-                        id: 'gender',
-                      }}
-                    >
-                      <option value="">Elegir..</option>
-                      <option value={'Mas'}>Masculino</option>
-                      <option value={'Fem'}>Femenino</option>
-                    </NativeSelect>
+                    <TextField
+                        label="Sexo"
+                        id="gender"
+                        disabled='true'
+                        value ={gender==='FEM'?'Femenino':'Masculino'}
+                        fullWidth
+                        margin="normal"
+                      />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>                  
-                    <InputLabel shrink >
-                      Lugar Origen
-                    </InputLabel>
-                    <NativeSelect
-                      value={origin}
-                      margin="normal"
-                      fullWidth
-                      disabled='true'
-                      inputProps={{
-                        name: 'origin',
-                        id: 'origin',
-                      }}
-                    >
-                      <option value="">No aplica</option>
-                      <option value={10}>Comisaría 1</option>
-                      <option value={20}>Comisaría 2</option>
-                      <option value={30}>Comisaría 3</option>
-                    </NativeSelect>
+                  <TextField
+                        label="Lugar Origen"
+                        id="fromSite"
+                        disabled='true'
+                        value ={fromSite.name}
+                        fullWidth
+                        margin="normal"
+                      />
                   </GridItem>
                   </GridContainer>
                 </CardBody>
