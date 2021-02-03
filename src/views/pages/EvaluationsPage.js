@@ -89,7 +89,8 @@ export default function EvaluationsPage({location={state:{ident:''}}}) {
   const [evaluationsResult, setEevaluationsResult] = useState({})
 
   const findPersonIdent=async()=>{ 
-    if (ident!==null || ident!==''){
+    console.log('ident: ',ident)
+    if (ident!== ''){
     const endpoint=HTTP_CONSTANTS.personOneParameterIdent+ident
     const response=await requestHttp('get',endpoint)
     if (response.response!==null) {
@@ -127,7 +128,7 @@ export default function EvaluationsPage({location={state:{ident:''}}}) {
   }
 
   useEffect(() => {
-    
+    console.log('ident: ',ident)
     findPersonIdent()
     getEvaluations()
     return () => {
