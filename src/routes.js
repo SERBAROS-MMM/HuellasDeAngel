@@ -24,6 +24,7 @@ import LoginPage from "views/pages/LoginPage.js";
 import UserPage from "views/pages/UserPage.js";
 import AddPersonPage from "views/pages/AddPersonPage.js";
 import EvaluationsPage from "views/pages/EvaluationsPage.js";
+import ParametersPage from "views/pages/ParametersPage.js";
 import TemperaturePage from "views/pages/TemperaturePage.js";
 
 const dashboardRoutes = [
@@ -71,7 +72,7 @@ const dashboardRoutes = [
     path: "/parametros",
     name: "Parametros",
     icon: Dashboard,
-    component: UserPage,
+    component: ParametersPage,
     navbar: true,
     layout: "/admin"
   },

@@ -409,4 +409,7 @@ export const EVALUATIONS = [
             ]								
     },
     
+    
 ]
+
+export const PLACES = ['Comisaría 1','Comisaría 2','Comisaría 3','Comisaría 4']
