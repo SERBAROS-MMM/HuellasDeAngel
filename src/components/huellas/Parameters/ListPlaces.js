@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -10,7 +10,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import HomeWork from '@material-ui/icons/HomeWork';
 import DeleteIcon from '@material-ui/icons/Delete';
-import {PLACES} from './../../../data/example.js';
+import {HTTP_CONSTANTS} from './../../../config/http-constants'
+import {requestHttp} from './../../../config/http-server'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,8 +28,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function ListPlaces() {
+export default function ListPlaces({fromSiteList}) {
   const classes = useStyles();
+
 
   return (
     <div className={classes.root}>
@@ -36,7 +38,7 @@ export default function ListPlaces() {
         <Grid item xs={12} md={6}>
           <div className={classes.demo}>
             <List dense='false'>
-              {PLACES.map((item,key)=>
+              {fromSiteList.map((item,key)=>
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
@@ -44,7 +46,7 @@ export default function ListPlaces() {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={item}
+                    primary={item.name}
                   />
                   <ListItemSecondaryAction>
                     <IconButton edge="end" aria-label="delete">
