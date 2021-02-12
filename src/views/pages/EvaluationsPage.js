@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EvaluationsPage({location={state:{ident:''}}}) {
+export default function EvaluationsPage({location={state:(JSON.parse("{\"ident\":\"\"}"))}}) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -88,36 +88,41 @@ export default function EvaluationsPage({location={state:{ident:''}}}) {
   const [personResult, setPersonResult] = useState({})
   const [evaluationsResult, setEevaluationsResult] = useState({})
 
-  const findPersonIdent=async()=>{ 
-    console.log('ident: ',ident)
-    if (ident!== ''){
-    const endpoint=HTTP_CONSTANTS.personOneParameterIdent+ident
-    const response=await requestHttp('get',endpoint)
-    if (response.response!==null) {
-    setPersonResult(response.response)
-    setPersonSelected(response.response)
-    setBandera(true)
-    }
-    else {
-      setIdent(personSelected.ident)
-      setBandera(false)
-    }
-    } else{
-    if (location.state.ident!==''){
-      const endpoint=HTTP_CONSTANTS.personOneParameterIdent+location.state.ident
+  const findPersonIdent= async() =>{ 
+    
+    if (ident && ident!==''){
+      
+      const endpoint=HTTP_CONSTANTS.personOneParameterIdent+ident
       const response=await requestHttp('get',endpoint)
+      
       if (response.response!==null) {
-      setPersonResult(response.response)
-      setPersonSelected(response.response)
-      setBandera(true)
+        setPersonResult(response.response)
+        setPersonSelected(response.response)
+        setBandera(true)
       }
       else {
         setIdent(personSelected.ident)
         setBandera(false)
       }
+    } 
+    else{
+      if ( location.state !== null && location.state.ident!==''){
+        
+        const endpoint=HTTP_CONSTANTS.personOneParameterIdent+location.state.ident
+        const response=await requestHttp('get',endpoint)
+       if (response.response!==null) {
+          setPersonResult(response.response)
+          setPersonSelected(response.response)
+          setBandera(true)
+        }
+        else {
+          setIdent(personSelected.ident)
+          setBandera(false)
+        }
+      }
+      setIdent('')
     }
   }
-}
 
   const getEvaluations=async()=>{ 
     const endpoint=HTTP_CONSTANTS.evaluations
@@ -125,12 +130,14 @@ export default function EvaluationsPage({location={state:{ident:''}}}) {
     if (response.response!==null) {
       setEevaluationsResult(response.response)
     }
+   
   }
 
   useEffect(() => {
-    console.log('ident: ',ident)
+    
     findPersonIdent()
     getEvaluations()
+    
     return () => {
     }
     // eslint-disable-next-line 
