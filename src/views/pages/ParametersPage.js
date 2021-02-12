@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Places from 'components/huellas/Parameters/Places.js'
 
+import NewEvaluation from 'components/huellas/Parameters/NewEvaluation.js'
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -77,7 +79,7 @@ export default function ParametersPage() {
         <Places/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <NewEvaluation/>
       </TabPanel>
     </div>
   );
