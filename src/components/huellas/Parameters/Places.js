@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,6 +10,8 @@ import ListPlaces from 'components/huellas/Parameters/ListPlaces.js';
 import {PLACES} from './../../../data/example.js'
 import AddCircleSharpIcon from '@material-ui/icons/AddCircleSharp';
 import IconButton from '@material-ui/core/IconButton';
+import {HTTP_CONSTANTS} from './../../../config/http-constants'
+import {requestHttp} from './../../../config/http-server'
 
 const styles = (theme) => ({
   paper: {
@@ -34,12 +36,59 @@ const styles = (theme) => ({
 const Places=(props)=> {
   const { classes } = props;
 
-  const [Place, setPlace] =useState('')
-  
-  const AddPlace=()=>{  
-    PLACES.push(Place)
-    setPlace('')
+  const [fromSite, setfromSite] =useState('')
+
+  useEffect(() => {
+    getListFromSites()
+    return () => {}
+  }, [])
+
+  const [fromSiteList, setFromSiteList] =useState([])
+
+  const getListFromSites = async () =>{
+    try {
+
+      const endpoint = HTTP_CONSTANTS.fromSites
+      const response = await requestHttp('get',endpoint)
+      if (response.status === 200) {
+        
+        setFromSiteList (response.response)
+      } 
+    }
+    catch (err) {
+    console.log(err)
+    } 
   }
+
+  
+  const FromSite= ()=>{  
+    
+    const data = {
+      name: fromSite
+    }
+    addFromSiteRequest(data)
+    
+  }
+
+  const addFromSiteRequest = async (data) => {
+    try {
+      console.log(data)
+      const endpoint = HTTP_CONSTANTS.fromSites
+      const response = await requestHttp('post',endpoint, data)
+      console.log(response)
+      if (response.status === 201) {
+        setfromSite('')
+        getListFromSites()
+      } else {
+        console.log(response)
+      }
+      
+    } catch (err) {
+      console.log(err)
+      
+    }
+  }
+
   
   return (
     <Paper className={classes.paper}>
@@ -50,8 +99,8 @@ const Places=(props)=> {
               <TextField id="filtro"
                 fullWidth
                 placeholder="Nombre de lugar de origen"
-                value={Place}                
-                onChange={(e) => setPlace(e.target.value)}
+                value={fromSite}                
+                onChange={(e) => setfromSite(e.target.value)}
                 InputProps={{
                 disableUnderline: true,
                 className: classes.searchInput,
@@ -65,7 +114,7 @@ const Places=(props)=> {
               color="primary"
               size="large" 
               className={classes.addPlace}  
-              onClick={AddPlace}
+              onClick={FromSite}
               >
                 <AddCircleSharpIcon fontSize="large" />
               </IconButton>
@@ -73,7 +122,7 @@ const Places=(props)=> {
           </Grid>
         </Toolbar>
       </AppBar> 
-      <ListPlaces/> 
+      <ListPlaces fromSiteList={fromSiteList}/> 
     </Paper>
   );
 }
