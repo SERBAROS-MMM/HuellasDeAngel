@@ -7,6 +7,7 @@ import GridContainer from "components/huellas/Person/GridContainer.js";
 import CardBody from "components/huellas/Person/CardBody.js";
 import AddEvaluationIcon from '@material-ui/icons/Add';
 import GridItem from "components/dashboard/Grid/GridItem.js";
+import NewStep from "components/huellas/Parameters/NewStep"
 
 const styles = (theme) => ({
   paper: {
@@ -29,12 +30,27 @@ const styles = (theme) => ({
 });
 
 const NewEvaluation=(props)=> {
+   
+  const [Steps, setSteps] =useState('')
 
-  const [Step, setStep] =useState('')
-  
-  const AddEvaluation=()=>{  
-    /*PLACES.push(Place)
-    setPlace('')*/
+  const [bandera, setBandera] = useState(false)
+
+  const [stepsList, setStepsList] =useState([])
+
+  const [nameEvaluation, setNameEvaluation] =useState('')
+
+  const arrStep = []
+
+  const showSteps=()=>{
+
+    for (let i = 0; i < Steps; i++) {
+      arrStep.push({
+        nameStep: "",
+        orderStep: i+1
+    })      
+    }
+    setStepsList(arrStep)
+    setBandera(true)    
   }
   
   return (
@@ -45,6 +61,9 @@ const NewEvaluation=(props)=> {
                       <TextField
                         label="Nombre Evaluación"
                         id="NameEvaluation"
+                        disabled={bandera}
+                        value={nameEvaluation}                      
+                        onChange={(e) => setNameEvaluation(e.target.value)}  
                         fullWidth
                       />
                     </GridItem>
@@ -52,16 +71,26 @@ const NewEvaluation=(props)=> {
                       <TextField
                        label="Número de pasos"
                        id="StepNumber"
+                       disabled={bandera}
+                       value={Steps}                       
+                       onChange={(e) => setSteps(e.target.value)}  
                        fullWidth
                        type="number"
                       
                     />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={3}>                     
-                    <IconButton>
+                    <IconButton onClick={showSteps}>
                         <AddEvaluationIcon />
                     </IconButton>
                     </GridItem>
+                    {bandera ? stepsList.map((item,key)=>
+                    <>
+                    <NewStep Step={item}/>
+                    </>): <>
+                    </>
+                    
+                    }
                     </GridContainer>
                     </CardBody>
   );
