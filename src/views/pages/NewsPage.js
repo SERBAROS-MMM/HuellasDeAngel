@@ -9,12 +9,11 @@ import AddCircleSharpIcon from '@material-ui/icons/AddCircleSharp';
 import MenuItem from '@material-ui/core/MenuItem';
 import {HTTP_CONSTANTS} from './../../config/http-constants'
 import {requestHttp} from './../../config/http-server'
-import ChipNews from 'components/huellas/Novedades/ChipsNews'
 import Paper from '@material-ui/core/Paper';
-import { isTemplateExpression } from 'typescript';
 import Chip from '@material-ui/core/Chip';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = (theme) => ({
+const useStyles  = makeStyles((theme) => ({
   paper: {
     maxWidth: 'auto',
     margin: 'auto',
@@ -34,7 +33,7 @@ const styles = (theme) => ({
   },
   paperChip: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'left',
     flexWrap: 'wrap',
     listStyle: 'none',
     padding: theme.spacing(0.5),
@@ -43,13 +42,13 @@ const styles = (theme) => ({
   chip: {
     margin: theme.spacing(0.5),
   },
-});
+}));
 
 
 
 export default function NewsPage () {
 
-  const classes = styles;
+  const classes = useStyles();
   
   const [filterPersons, setFilterPersons] = useState("")
   
@@ -82,10 +81,13 @@ export default function NewsPage () {
 
     
   const getPersonsFiltered = async () =>{
-    const endpoint=HTTP_CONSTANTS.personsfilter+filterPersons
+
+    const endpoint=HTTP_CONSTANTS.personsfilter+filterPersons    
+    console.log(endpoint)
     const response=await requestHttp('get',endpoint)
-    console.log(response)
-    setPersons(response.response)
+    const auxPersons=persons
+    auxPersons.push(response.response)
+    setPersons(auxPersons)
   }
 
 const getFilterPersons=async()=>{
@@ -122,33 +124,46 @@ const getFilterPersons=async()=>{
     const auxArrBoys=arrBoys
     auxArrBoys.push({
       key: arrBoys.length + 1,
-      label: boy
+      label: boy.name + " " + boy.lastName1 + " " + boy.lastName2,
+      boy
   })
-  setArrBoys(auxArrBoys)
-  getPersons()
+
+  setArrBoys(auxArrBoys)  
+
+  const auxPersons = persons.filter((item,key)=>{
+
+    const nombreCompleto=item._id
+
+    return (nombreCompleto !== boy._id)
+  
+  }
+  )
+  setPersons(auxPersons)
   }
 
-  const deleteBoy=(boyDelete)=>{  
-        
-    const auxArrBoys=arrBoys
-    for (let i=0;i<arrBoys.length;i++){
-      if (auxArrBoys[i].label == boyDelete.label){
-        auxArrBoys.splice(i,1)
-      }
-    }
+  const deleteBoy=(boyDelete)=>()=>{  
+   
+    const auxArrBoys=arrBoys.filter((item,key)=>{
+      console.log(item.boy._id," ", boyDelete.boy._id)
+      return(
+        item.boy._id !== boyDelete.boy._id
+      )
+    })
+    
+  console.log(auxArrBoys,boyDelete.label)
   setArrBoys(auxArrBoys)
-  getPersons()
-  }
-  
-  /*const arrBoys = [
-    { key: 0, label: 'Angular' },
-    { key: 1, label: 'jQuery' },
-    { key: 2, label: 'Polymer' },
-    { key: 3, label: 'React' },
-    { key: 4, label: 'Vue.js' },
-  ];*/ 
-  
 
+  returnBoy(boyDelete.boy)
+  
+  }  
+
+  const returnBoy =(boyReturn)=> {
+    const auxPersons=persons
+    console.log(boyReturn)
+    auxPersons.push(boyReturn)
+    setPersons(auxPersons)
+
+  }
   return (
   <div className={classes.contentWrapper}>
           <GridList className={classes.gridList} cellHeight={'auto'} cols={1} >
@@ -164,7 +179,7 @@ const getFilterPersons=async()=>{
               helperText="Por favor seleccione un niño"
             >
               {persons.map((item,key) => (
-                <MenuItem key={item.key} value={item.name + " " + item.lastName1 + " " + item.lastName2}>
+                <MenuItem key={item._id} value={item}>
                   {item.name + " " + item.lastName1 + " " + item.lastName2}
                 </MenuItem>
               ))}
@@ -185,13 +200,12 @@ const getFilterPersons=async()=>{
             </GridContainer>
             <Paper component="ul" className={classes.paperChip}>            
             {arrBoys.map((item,key) => (
-              <li key={item.key}>
-              {/*<ChipNews key= {key} boy= {item} onDeleted={deleteBoy}/>
-              <Chip
+              <li key={item.key}>              
+              <Chip              
               label={item.label}
               onDelete={deleteBoy(item)}
-              className={classes.chip}              
-            />*/}
+              className={classes.chip}             
+            /> 
               </li>
             ))
             }
