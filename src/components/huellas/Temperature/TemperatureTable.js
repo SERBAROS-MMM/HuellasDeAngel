@@ -58,6 +58,7 @@ const getTemperaturesDay = async () =>{
     if(temperaturesResult.length==0)
     {
       console.log('sin f')
+      
       setListPersons(persons)
     }else{
       console.log('con f')
