@@ -26,6 +26,8 @@ import AddPersonPage from "views/pages/AddPersonPage.js";
 import EvaluationsPage from "views/pages/EvaluationsPage.js";
 import ParametersPage from "views/pages/ParametersPage.js";
 import TemperaturePage from "views/pages/TemperaturePage.js";
+import NewsPage from "views/pages/NewsPage.js";
+
 
 const dashboardRoutes = [
   {
@@ -56,7 +58,7 @@ const dashboardRoutes = [
     path: "/novedades",
     name: "Novedades",
     icon: Dashboard,
-    component: UserPage,
+    component: NewsPage,
     navbar: true,
     layout: "/admin"
   },
