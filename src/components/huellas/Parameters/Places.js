@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import ListPlaces from 'components/huellas/Parameters/ListPlaces.js';
-import {PLACES} from './../../../data/example.js'
 import AddCircleSharpIcon from '@material-ui/icons/AddCircleSharp';
 import IconButton from '@material-ui/core/IconButton';
 import {HTTP_CONSTANTS} from './../../../config/http-constants'
