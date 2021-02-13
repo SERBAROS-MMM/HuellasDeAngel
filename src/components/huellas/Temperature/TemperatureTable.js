@@ -32,24 +32,59 @@ const styles = (theme) => ({
 
 const TemperatureTable=({persons}) => {
 const classes = styles;
-/*var f = new Date()
-  const fhoy = f.getFullYear() +"-"+ ((f.getMonth() +1)>9?(f.getMonth() +1):'0'+(f.getMonth() +1))+ "-" + ( f.getDate() >9? f.getDate():'0'+f.getDate())*/
-const [day, setDay] = useState('')
+
+var f = new Date()
+const fhoy = f.getFullYear() +"-"+ ((f.getMonth() +1)>9?(f.getMonth() +1):'0'+(f.getMonth() +1))+ "-" + ( f.getDate() >9? f.getDate():'0'+f.getDate())
+
+const [day, setDay] = useState(fhoy)
 const [temperatures, setTemperatures] = useState([])
-const [mostrar, setMostrar] = useState(false)
 const [listPersons,setListPersons] = useState(persons)
 
+
 useEffect(() => {
-  getFilterPersons()
-  return () => {
+  
+  getTemperaturesDay()
+
+  return () => { }
+}, [day])
+
+const getTemperaturesDay = async () =>{
+
+  try {
+    const endpoint=HTTP_CONSTANTS.temperatures+'day/'+day+"T00:00:00.000Z"
+    const response=await requestHttp('get',endpoint)
+    const temperaturesResult = response.response
+   // setTemperatures(temperaturesResult)
+    if(temperaturesResult.length==0)
+    {
+      console.log('sin f')
+      setListPersons(persons)
+    }else{
+      console.log('con f')
+      console.log(listPersons,temperaturesResult)
+      
+      const auxPersons = listPersons.filter((item,key) => {
+        for(let i=0;i<temperaturesResult.length;i++)
+        {
+          console.log(item._id+" "+temperaturesResult[i].person)
+          if(item._id === temperaturesResult[i].person)
+          {
+            return (0)
+          }
+        }
+         return 1
+        }
+      )
+      
+      console.log(auxPersons)
+      
+      setListPersons(auxPersons)
+    }
+  } catch (error) {
+    console.error('error.getPersons:',error)
   }
-}, [])
+}
 
-
-  useEffect(() => {
-    getFilterPersons()
-    return () => {} 
-  }, [day])
 
 const saveTemperature = (e) =>{
   var identActual = (e.currentTarget.id).substr(3)
@@ -60,84 +95,25 @@ const saveTemperature = (e) =>{
     temperature: document.getElementById("temperature"+identActual).value,
     person: identActual
   }
-  
+  document.getElementById("temperature"+identActual).value=''
   AddTemperaturesRequest(data)
-  //console.log(day+"T00:00:00.000Z" + temperature + person)
 } 
-
-const getFilterPersons=()=>{
-  try { 
-    console.log('day',day)
-    if(day !==''){ 
-       getTemperaturesDay()
-      setMostrar(true)
-    }
-  } catch (error) {
-    console.error('error.getFilterPersons:',error)      
-  }
-}
-
-useEffect(() => {
-  
-if(temperatures.length>0){
-  filterPersons()
-}
-
-  return () => {}
-}, [temperatures])
-
-useEffect(() => {
-  
-  console.log(listPersons)
-  
-    return () => {}
-  }, [listPersons])
-
-const getTemperaturesDay = async () =>{
-
-    try {
-      const endpoint=HTTP_CONSTANTS.temperatures+'day/'+day+"T00:00:00.000Z"
-      const response=await requestHttp('get',endpoint)
-      setTemperatures(response.response)
-      setListPersons(persons)
-    } catch (error) {
-      console.error('error.getPersons:',error)
-    }
-}
 
 const AddTemperaturesRequest = async (data) =>{
   try {
     
-    console.log(data)
     const endpoint=HTTP_CONSTANTS.temperatures
     const response=await requestHttp('post',endpoint,data)
-    console.log(response.response)
-    setListPersons(persons)
-    getFilterPersons()
+    if(response.status===201)
+    {
+      const auxListPersons = listPersons.filter((item,key) => (
+        item._id !== data.person))
+        console.log(auxListPersons)
+      setListPersons(auxListPersons)
+    }
   } catch (error) {
     console.error('error.getPersons:',error)
   }
-}
-
-const filterPersons = () =>{
-    
-  var temperaturesPersons = listPersons
-  for (var i=0;i<listPersons.length;i++){
-    
-  for (var j=0;j<temperatures.length;j++){
-    
-    if(listPersons[i]._id ===temperatures[j].person){
-      
-      temperaturesPersons.splice( i, 1 )
-    }
-    }
-  }
-
-  setListPersons(temperaturesPersons)
-
-  console.log(persons)
-//console.log(temperaturesFiltered.filter((valor, indiceActual, arreglo) => arreglo.indexOf(valor) === indiceActual))
-  
 }
 
 return (
@@ -163,7 +139,7 @@ return (
         </GridItem>
         </GridContainer>
         
-            {  mostrar ?                
+            {               
               listPersons.map((item,key)=>
              
                 <CardBody key={key}>
@@ -203,8 +179,7 @@ return (
                     </GridItem>
             
                     </GridContainer> 
-                    </CardBody>):<></>}
-               
+                    </CardBody>)}
             </Card>
         </GridList>   
 </div>
