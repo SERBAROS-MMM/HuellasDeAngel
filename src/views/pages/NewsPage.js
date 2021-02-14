@@ -12,6 +12,7 @@ import {requestHttp} from './../../config/http-server'
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 const useStyles  = makeStyles((theme) => ({
   paper: {
@@ -41,6 +42,10 @@ const useStyles  = makeStyles((theme) => ({
   },
   chip: {
     margin: theme.spacing(0.5),
+  },  
+  addNews2: {
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -59,6 +64,8 @@ export default function NewsPage () {
   const [existPersons, setExistPersons] = useState(false)
 
   const [arrBoys,setArrBoys] = useState([])
+
+  const [bandera, setBandera] = useState(false)
 
   const getPersons=async()=>{
     try {
@@ -86,11 +93,19 @@ export default function NewsPage () {
     return () => {}
     }, [persons])
 
+    useEffect(() => {
+      if (arrBoys.length > 0){
+          setBandera(true)
+      }else{
+        setBandera(false)
+      }
+      return () => {}
+      }, [arrBoys])
+
     
   const getPersonsFiltered = async () =>{
 
-    const endpoint=HTTP_CONSTANTS.personsfilter+filterPersons    
-    console.log(endpoint)
+    const endpoint=HTTP_CONSTANTS.personsfilter+filterPersons
     const response=await requestHttp('get',endpoint)
     const auxPersons=persons
     auxPersons.push(response.response)
@@ -128,15 +143,17 @@ const getFilterPersons=async()=>{
   
   const addBoy=()=>{  
     
-    console.log('addBoy',arrBoys)
     const auxArrBoys=arrBoys
     auxArrBoys.push({
       key: arrBoys.length + 1,
       label: boy.name + " " + boy.lastName1 + " " + boy.lastName2,
       boy
+      
   })
 
-  setArrBoys(auxArrBoys)  
+  setArrBoys(auxArrBoys)
+
+  setBandera(true)
 
   const auxPersons = persons.filter((item,key)=>{
 
@@ -147,18 +164,17 @@ const getFilterPersons=async()=>{
   }
   )
   setPersons(auxPersons)
+  
   }
 
   const deleteBoy=(boyDelete)=>()=>{  
    
     const auxArrBoys=arrBoys.filter((item,key)=>{
-      console.log(item.boy._id," ", boyDelete.boy._id)
       return(
         item.boy._id !== boyDelete.boy._id
       )
     })
-    
-  console.log(auxArrBoys,boyDelete.label)
+
   setArrBoys(auxArrBoys)
 
   returnBoy(boyDelete.boy)
@@ -167,11 +183,11 @@ const getFilterPersons=async()=>{
 
   const returnBoy =(boyReturn)=> {
     const auxPersons=persons
-    console.log(boyReturn)
     auxPersons.push(boyReturn)
     setPersons(auxPersons)
-
+  
   }
+  
   return (
   <div className={classes.contentWrapper}>
           <GridList className={classes.gridList} cellHeight={'auto'} cols={1} >
@@ -234,6 +250,28 @@ const getFilterPersons=async()=>{
                           onChange={(e) => setHoy(e.target.value)}
                         />
           </GridItem>
+          {bandera &&
+          <>
+          <GridItem xs={12} sm={12} md={12}>          
+          <TextField
+                  label="Novedad"               
+                  type="text"
+                  fullWidth
+                  multiline
+                  rows={4}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  margin="normal"
+                />
+          </GridItem>
+          <GridItem>
+              <Button variant="contained" color="primary" className={classes.addNews2}>
+                Agregar
+              </Button>          
+          </GridItem>
+          </>
+          }
           </GridContainer>
           
               
