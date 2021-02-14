@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import SaveIcon from '@material-ui/icons/SaveSharp';
 import {HTTP_CONSTANTS} from './../../../config/http-constants'
 import {requestHttp} from './../../../config/http-server'
+import { Typography } from '@material-ui/core';
 
 const styles = (theme) => ({
     contentWrapper: {
@@ -30,22 +31,31 @@ const styles = (theme) => ({
     },
   });
 
-const TemperatureTable=({persons}) => {
+const TemperatureTable=() => {
 const classes = styles;
 
 var f = new Date()
 const fhoy = f.getFullYear() +"-"+ ((f.getMonth() +1)>9?(f.getMonth() +1):'0'+(f.getMonth() +1))+ "-" + ( f.getDate() >9? f.getDate():'0'+f.getDate())
 
+const [listPersons,setListPersons] = useState([])
+const [listTemperatures,setListTemperatures] = useState([])
 const [day, setDay] = useState(fhoy)
-const [temperatures, setTemperatures] = useState([])
-const [listPersons,setListPersons] = useState(persons)
 
+const getPersons=async()=>{
+  try {
+    const endpoint=HTTP_CONSTANTS.persons
+    const response=await requestHttp('get',endpoint)
+    setListPersons(response.response)
+    getTemperaturesDay()
+  } catch (error) {
+    console.error('error.getPersons:',error)
+  }
+}
 
 useEffect(() => {
-  
-  getTemperaturesDay()
-
+  getPersons()
   return () => { }
+  // eslint-disable-next-line
 }, [day])
 
 const getTemperaturesDay = async () =>{
@@ -53,41 +63,37 @@ const getTemperaturesDay = async () =>{
   try {
     const endpoint=HTTP_CONSTANTS.temperatures+'day/'+day+"T00:00:00.000Z"
     const response=await requestHttp('get',endpoint)
-    const temperaturesResult = response.response
-   // setTemperatures(temperaturesResult)
-    if(temperaturesResult.length==0)
-    {
-      console.log('sin f')
-      
-      setListPersons(persons)
-    }else{
-      console.log('con f')
-      console.log(listPersons,temperaturesResult)
-      
-      const auxPersons = listPersons.filter((item,key) => {
-        for(let i=0;i<temperaturesResult.length;i++)
-        {
-          console.log(item._id+" "+temperaturesResult[i].person)
-          if(item._id === temperaturesResult[i].person)
-          {
-            return (0)
-          }
-        }
-         return 1
-        }
-      )
-      
-      console.log(auxPersons)
-      
-      setListPersons(auxPersons)
-    }
+    console.log(endpoint,response)
+    setListTemperatures(response.response)
   } catch (error) {
     console.error('error.getPersons:',error)
   }
 }
 
+useEffect(() => {
+  console.log(listTemperatures)
+  if(listTemperatures.length>0){
+  const auxPersons = listPersons.filter((item,key) => {
+    for(let i=0;i<listTemperatures.length;i++)
+    {
+      
+      if(item._id === listTemperatures[i].person)
+      {
+        return (0)
+      }
+    }
+     return 1
+    }
+  )
+
+  setListPersons(auxPersons)
+  }
+  return () => {}
+}, [listTemperatures])
+
 
 const saveTemperature = (e) =>{
+  e.preventDefault();
   var identActual = (e.currentTarget.id).substr(3)
   var daySeleccted = new Date (day +"T00:00:00.000Z")
   
@@ -102,27 +108,22 @@ const saveTemperature = (e) =>{
 
 const AddTemperaturesRequest = async (data) =>{
   try {
-    
     const endpoint=HTTP_CONSTANTS.temperatures
     const response=await requestHttp('post',endpoint,data)
     if(response.status===201)
     {
       const auxListPersons = listPersons.filter((item,key) => (
         item._id !== data.person))
-        console.log(auxListPersons)
+       
       setListPersons(auxListPersons)
     }
   } catch (error) {
     console.error('error.getPersons:',error)
   }
 }
-
 return (
-<div className={classes.contentWrapper}>
-        <GridList className={classes.gridList} cellHeight={'auto'} cols={1} >
-        <Card>
-        <GridContainer>
-          
+  <div className={classes.contentWrapper}>
+      <GridContainer>
         <GridItem xs={12} sm={12} md={3}>
          <TextField
                        value ={day} 
@@ -139,12 +140,11 @@ return (
                       />
         </GridItem>
         </GridContainer>
-        
-            {               
+        <GridList className={classes.gridList} cellHeight={'auto'} cols={1} >
+        <Card>     
+            {  listPersons.length>0 ?             
               listPersons.map((item,key)=>
-             
                 <CardBody key={key}>
-                  
                    <GridContainer>                                     
                     <GridItem xs={12} sm={12} md={3}>
                       <TextField
@@ -180,10 +180,10 @@ return (
                     </GridItem>
             
                     </GridContainer> 
-                    </CardBody>)}
+                    </CardBody>):<Typography>Todos los activos este día, ya tiene las temperaturas ingresadas para este día.</Typography>}
             </Card>
         </GridList>   
-</div>
+  </div>
 )
 }
 

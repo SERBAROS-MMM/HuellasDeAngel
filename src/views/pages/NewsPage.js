@@ -71,6 +71,13 @@ export default function NewsPage () {
   }
 
   useEffect(() => {
+    
+    return () => {
+      
+    }
+  }, [existPersons,setFilterPersons])
+
+  useEffect(() => {
     if (persons.length >0){
         setExistPersons(true)
     }else{
@@ -106,6 +113,7 @@ const getFilterPersons=async()=>{
 
     getFilterPersons()
     return () => {}
+    // eslint-disable-next-line
     }, [filterPersons])
 
   const [hoy, setHoy] = useState('')

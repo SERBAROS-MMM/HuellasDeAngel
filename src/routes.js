@@ -42,7 +42,7 @@ const dashboardRoutes = [
     path: "/usuario",
     name: "Usuario",
     icon: Dashboard,
-    component: LoginPage,
+    component: UserPage,
     navbar: false,
     layout: "/admin"
   },
