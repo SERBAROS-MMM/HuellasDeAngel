@@ -1,9 +1,9 @@
 export const HTTP_CONSTANTS={
-    //url:'http://localhost:4000/API/',
-    //urlUp:'http://localhost:4000/API/up',
+    url:'http://localhost:4000/API/',
+    urlUp:'http://localhost:4000/API/up',
     
-    url:'http://69.164.206.46:4000/API/',
-    urlUp:'http://69.164.206.46:4000/API/up',
+    //url:'http://69.164.206.46:4000/API/',
+    //urlUp:'http://69.164.206.46:4000/API/up',
     login:'auth/login',
     autologin:'auth/autologin',
     persons:'persons/',
@@ -15,4 +15,5 @@ export const HTTP_CONSTANTS={
     indicadores: 'count/',
     temperatures: 'temperature/',
     evaluations: 'params/evaluations/',
+    news: 'new/',
 }
