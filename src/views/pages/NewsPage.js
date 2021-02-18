@@ -67,6 +67,8 @@ export default function NewsPage () {
 
   const [bandera, setBandera] = useState(false)
 
+  const [novedad, setNovedad] = useState('')
+
   const getPersons=async()=>{
     try {
           const endpoint=HTTP_CONSTANTS.persons
@@ -185,9 +187,43 @@ const getFilterPersons=async()=>{
     const auxPersons=persons
     auxPersons.push(boyReturn)
     setPersons(auxPersons)
-  
+    
+  }
+
+  const addNewHandler=(e)=>{
+    
+    e.preventDefault();
+    const auxIds=[]
+    arrBoys.map((item,key)=>{
+      auxIds.push(item.boy._id)
+    }
+    )
+    const data = {
+      day:hoy,
+      new:novedad,
+      persons:auxIds
+    }
+    AddNewsRequest(data)
   }
   
+  const AddNewsRequest = async (data) =>{
+    try {
+      const endpoint=HTTP_CONSTANTS.news
+      const response=await requestHttp('post',endpoint,data)
+      if(response.status===201)
+      {
+        setNovedad('')
+
+        arrBoys.map((item,key)=>{
+          returnBoy(item.boy)      
+        })
+    
+      setArrBoys([])
+      }
+    } catch (error) {
+      console.error('error.getPersons:',error)
+    }
+  }
   return (
   <div className={classes.contentWrapper}>
           <GridList className={classes.gridList} cellHeight={'auto'} cols={1} >
@@ -250,15 +286,15 @@ const getFilterPersons=async()=>{
                           onChange={(e) => setHoy(e.target.value)}
                         />
           </GridItem>
-          {bandera &&
-          <>
           <GridItem xs={12} sm={12} md={12}>          
           <TextField
+                  value={novedad}
                   label="Novedad"               
                   type="text"
                   fullWidth
                   multiline
                   rows={4}
+                  onChange={(e)=>setNovedad(e.target.value)}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -266,12 +302,10 @@ const getFilterPersons=async()=>{
                 />
           </GridItem>
           <GridItem>
-              <Button variant="contained" color="primary" className={classes.addNews2}>
+              <Button variant="contained" color="primary" className={classes.addNews2} onClick={addNewHandler}>
                 Agregar
               </Button>          
           </GridItem>
-          </>
-          }
           </GridContainer>
           
               
