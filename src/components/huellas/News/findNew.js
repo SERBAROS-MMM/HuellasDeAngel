@@ -11,7 +11,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import CardHeader from "components/huellas/Person/CardHeader.js";
 import CardBody from "components/huellas/Person/CardBody.js";
-import Typography from '@material-ui/core/Typography'
+import Typography from '@material-ui/core/Typography';
+import * as XLSX from 'xlsx'
 
 const useStyles  = makeStyles((theme) => ({
   paper: {
@@ -80,6 +81,8 @@ export default function FindNew () {
   const aux=['1']
 
   const [novedades,setNovedades]=useState([])
+
+  const [exportNovedades,setExportNovedades]=useState([])
 
   const getPersons=async()=>{
     try {
@@ -160,6 +163,68 @@ const getFilterPersons=async()=>{
         console.log(novedades)
     }
 
+    const getNewsByBoy = async () =>{
+
+      try {
+        const endpoint=HTTP_CONSTANTS.newsfilter+boy._id
+        const response=await requestHttp('get',endpoint)
+        console.log(endpoint,response)
+        setNovedades(response.response)
+      } catch (error) {
+        console.error('error.getPersons:',error)
+      }
+    }
+
+  const searchByBoyHandler=()=>{
+    getNewsByBoy()
+    console.log(novedades)
+  }
+
+  useEffect(() => {
+    
+    const auxExport = []
+
+    if (novedades.length>0){
+      novedades.map((item,key) =>{
+        let listNiño=""
+        item.persons.map((person,key) =>{
+          listNiño += " - " + person.name + " " + person.lastName1 + " " + person.lastName2
+        })
+
+        const novedad ={
+          fecha:item.day.substr(0,10),
+          niños: listNiño,
+          novedad: item.new  
+        }
+        auxExport.push(novedad)
+      }
+
+      )
+    }
+
+    setExportNovedades(auxExport)
+
+    return () => {
+      
+    }
+  }, [novedades])
+  
+  const exportNewsHandler = ()=>{
+    //Llena la hoja
+    let ws = XLSX.utils.json_to_sheet(exportNovedades);
+
+    //Crea libro
+    let wb = XLSX.utils.book_new();
+    
+    //Inserta hoja en libro con el nombre de la hoja
+    XLSX.utils.book_append_sheet(wb , ws , "News");
+    
+    let f = new Date()
+    const fhoy = f.getFullYear() + ((f.getMonth() +1)>9?(f.getMonth() +1):'0'+(f.getMonth() +1)) + ( f.getDate() >9? f.getDate():'0'+f.getDate()) +"_"+ f.getTime()
+    XLSX.writeFile(wb, "novedades_"+fhoy+".xlsx");
+
+  }
+
   return (
   <div className={classes.contentWrapper}>
           <GridList className={classes.gridList} cellHeight={'auto'} cols={1} >
@@ -203,10 +268,11 @@ const getFilterPersons=async()=>{
                         </TextField>
                     </GridItem>
                     <GridItem xs={12} sm={12} md={4}>
-                    <Button variant="contained" color="primary" className={classes.addNews2} /*onClick={addNewHandler}*/>
+                    <Button variant="contained" color="primary" className={classes.addNews2} onClick={searchByBoyHandler}>
                       Buscar
                     </Button>          
                     </GridItem>
+                    
                     </>
                 )
                 
@@ -239,24 +305,42 @@ const getFilterPersons=async()=>{
             }
         })
     }
+       
             </GridContainer>
          </Card>
-    </GridList>
-       
-    {novedades.map((item,key) =>(
-        <GridContainer>
-            <Card>
-                <CardHeader color="primary">                            
-                    <h4 className={classes.cardTitleWhite}>{item.persons}</h4>                            
-                </CardHeader>
+    </GridList>  
+    {    
+    novedades.length > 0 ? <>
+    <GridContainer>
+      <GridItem>
+       <Button variant="contained" color="primary" className={classes.addNews2} onClick={exportNewsHandler}>
+         Exportar
+     </Button>
+     </GridItem>
+     </GridContainer>
+     <GridContainer>
+     {
+    novedades.map((item,key) =>(
+                <Card>
+                <CardHeader color="primary">
+                <h4 className={classes.cardTitleWhite}>
+                  {
+                  searchBy === "Fecha" ?
+                  item.persons.map((person,key) =>(                            
+                    " - " + person.name + " " + person.lastName1 + " " + person.lastName2
+                  )):
+                  item.day.substr(0,10)
+                
+                  }</h4></CardHeader>
                 <CardBody>
                     <Typography variant="h8" color="initial">{item.new} </Typography>
                 </CardBody>
-            </Card>
-        </GridContainer>    
+                </Card>
             )
-        )
-    }
+        )  
+          }
+        </GridContainer>    
+    </>:<></>}
   </div>
   )
   

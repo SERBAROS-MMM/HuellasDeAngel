@@ -16,4 +16,5 @@ export const HTTP_CONSTANTS={
     temperatures: 'temperature/',
     evaluations: 'params/evaluations/',
     news: 'new/',
+    newsfilter: 'new/filter/',
 }
