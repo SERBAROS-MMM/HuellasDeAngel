@@ -27,6 +27,7 @@ import EvaluationsPage from "views/pages/EvaluationsPage.js";
 import ParametersPage from "views/pages/ParametersPage.js";
 import TemperaturePage from "views/pages/TemperaturePage.js";
 import NewsPage from "views/pages/NewsPage.js";
+import PersonsPage from "views/pages/PersonsPage.js";
 
 
 const dashboardRoutes = [
@@ -47,10 +48,10 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/Reportes",
-    name: "Reportes",
+    path: "/Personas",
+    name: "Personas",
     icon: Dashboard,
-    component: LoginPage,
+    component: PersonsPage,
     navbar: true,
     layout: "/admin"
   },
@@ -99,6 +100,14 @@ const dashboardRoutes = [
     name: "Temperatura",
     icon: Dashboard,
     component: TemperaturePage,
+    navbar: true,
+    layout: "/admin"
+  },
+  {
+    path: "/Reportes",
+    name: "Reportes",
+    icon: Dashboard,
+    component: LoginPage,
     navbar: true,
     layout: "/admin"
   },

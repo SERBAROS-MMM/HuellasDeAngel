@@ -33,9 +33,11 @@ export default function AdminNavbarLinks() {
   }
   
   const handleClickAway = event => {
+    console.log(event)
   };
 
   const handleClickSettings = event => {
+    console.log(event)
     window.location.href = '/admin/configuracion'
   };
 

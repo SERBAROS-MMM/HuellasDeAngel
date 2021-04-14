@@ -80,7 +80,7 @@ export default function CreateNew () {
   }
 
   useEffect(() => {
-    
+    bandera
     return () => {
       
     }
@@ -157,7 +157,7 @@ const getFilterPersons=async()=>{
 
   setBandera(true)
 
-  const auxPersons = persons.filter((item,key)=>{
+  const auxPersons = persons.filter((item)=>{
 
     const nombreCompleto=item._id
 
@@ -171,7 +171,7 @@ const getFilterPersons=async()=>{
 
   const deleteBoy=(boyDelete)=>()=>{  
    
-    const auxArrBoys=arrBoys.filter((item,key)=>{
+    const auxArrBoys=arrBoys.filter((item)=>{
       return(
         item.boy._id !== boyDelete.boy._id
       )
@@ -194,7 +194,7 @@ const getFilterPersons=async()=>{
     
     e.preventDefault();
     const auxIds=[]
-    arrBoys.map((item,key)=>{
+    arrBoys.map((item)=>{
       auxIds.push(item.boy._id)
     }
     )
@@ -214,7 +214,7 @@ const getFilterPersons=async()=>{
       {
         setNovedad('')
 
-        arrBoys.map((item,key)=>{
+        arrBoys.map((item)=>{
           returnBoy(item.boy)      
         })
     
@@ -238,8 +238,8 @@ const getFilterPersons=async()=>{
               onChange={(e)=>setBoy(e.target.value)}
               helperText="Por favor seleccione un niño"
             >
-              {persons.map((item,key) => (
-                <MenuItem key={item._id} value={item}>
+              {persons.map((item) => (
+                <MenuItem key={item._id} value={item} >
                   {item.name + " " + item.lastName1 + " " + item.lastName2}
                 </MenuItem>
               ))}
@@ -259,7 +259,7 @@ const getFilterPersons=async()=>{
             </GridItem>
             </GridContainer>
             <Paper component="ul" className={classes.paperChip}>            
-            {arrBoys.map((item,key) => (
+            {arrBoys.map((item) => (
               <li key={item.key}>              
               <Chip              
               label={item.label}

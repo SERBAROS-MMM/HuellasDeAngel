@@ -20,7 +20,7 @@ import {HTTP_CONSTANTS} from './../../config/http-constants'
 import {requestHttp,requestHttpFile} from './../../config/http-server'
 import path from 'path'
 
-const useStyles = makeStyles((styles) => ({
+const useStyles = makeStyles(() => ({
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
     margin: "0",

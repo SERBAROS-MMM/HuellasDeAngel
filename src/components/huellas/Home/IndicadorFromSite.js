@@ -10,7 +10,7 @@ import Update from "@material-ui/icons/Update"
 import Accessibility from "@material-ui/icons/Accessibility"
 
 // core components
-import GridItem from "components/dashboard/Grid/GridItem.js"
+
 import Card from "components/dashboard/Card/Card.js"
 import CardHeader from "components/dashboard/Card/CardHeader.js"
 import CardIcon from "components/dashboard/Card/CardIcon.js"
@@ -46,13 +46,13 @@ const IndicadorFromSite = ({fromSite}) => {
         "param":"fromSite",
         "value":fromSite._id
     }
-    getCountTotal( data)
+    getCountTotal(data)
     return () => {}
     // eslint-disable-next-line
   }, [])
 
   return (
-        <GridItem xs={12} sm={6} md={3} >
+       
           <Card>
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
@@ -68,7 +68,6 @@ const IndicadorFromSite = ({fromSite}) => {
               </div>
             </CardFooter>
           </Card>
-        </GridItem>
   )
 
 }

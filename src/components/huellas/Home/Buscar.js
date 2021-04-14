@@ -82,7 +82,7 @@ const Buscar=(props)=> {
 
     getFilterPersons()
     return () => {}
-    }, [filterPersons]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [filterPersons])
 
   useEffect(() => {
     if (persons.length >0){

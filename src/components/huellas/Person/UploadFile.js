@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import File from '@material-ui/icons/AttachFile';
 
-const styles = (theme) => ({
+const styles = () => ({
     input: {
         display: 'none'
     }

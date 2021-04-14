@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TabEvaluation({Steps = []}) {
+const TabEvaluation = ({Steps = []})=> {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -34,8 +34,8 @@ export default function TabEvaluation({Steps = []}) {
     <div className={classes.root}>
         {
              Steps.map((item,key)=>
-             <ExpansionPanel expanded={expanded === 'panel'+key} onChange={handleChange('panel'+key)}>
-                 <ExpansionPanelSummary
+             <ExpansionPanel key={key} expanded={expanded === 'panel'+key} onChange={handleChange('panel'+key)}>
+                 <ExpansionPanelSummary 
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls={"panel"+key+"bh-content"}
                     id={"panel"+key+"bh-header"}
@@ -53,3 +53,5 @@ export default function TabEvaluation({Steps = []}) {
     </div>
   );
 }
+
+export default TabEvaluation

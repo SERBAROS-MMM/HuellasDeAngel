@@ -14,7 +14,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import { Link } from 'react-router-dom'
 import {PersonSelectedContext} from './../../../contexts/PersonSelectedContext'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
  
   cardPerson: {
     display: 'flex',

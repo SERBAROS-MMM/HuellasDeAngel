@@ -3,11 +3,11 @@ import TextField from '@material-ui/core/TextField';
 import GridContainer from "components/huellas/Person/GridContainer.js";
 import GridItem from "components/dashboard/Grid/GridItem.js";
 import Card from "components/huellas/Person/Card.js";
-import { makeStyles } from "@material-ui/core/styles";
+//import { makeStyles } from "@material-ui/core/styles";
 import CardBody from "components/huellas/Person/CardBody.js";
 import MenuItem from '@material-ui/core/MenuItem';
 
-const useStyles = makeStyles((styles) => ({
+/*const useStyles = makeStyles(() => ({
   cardTitleWhite: {
     color: "#FFFFFF",
     marginTop: "0px",
@@ -17,11 +17,11 @@ const useStyles = makeStyles((styles) => ({
     marginBottom: "3px",
     textDecoration: "none"
   }
-}))
+}))*/
 
 export default function NewField ({Field})  {
 
-  const classes = useStyles();
+  //const classes = useStyles();
 
   const tipos = ["Text","Input","Date"]
 
@@ -53,7 +53,7 @@ export default function NewField ({Field})  {
                             onChange={(e) => setTypeField(e.target.value)}
                             fullWidth                           
                           >
-                          {tipos.map((item,key) => (
+                          {tipos.map((item) => (
                            <MenuItem key={item._id} value={item}>
                                 {item}
                            </MenuItem>

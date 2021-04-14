@@ -13,7 +13,7 @@ import {HTTP_CONSTANTS} from './../../../config/http-constants'
 import {requestHttp} from './../../../config/http-server'
 import { Typography } from '@material-ui/core';
 
-const styles = (theme) => ({
+const styles = () => ({
     contentWrapper: {
       margin: '0px',
     },
@@ -73,7 +73,7 @@ const getTemperaturesDay = async () =>{
 useEffect(() => {
   console.log(listTemperatures)
   if(listTemperatures.length>0){
-  const auxPersons = listPersons.filter((item,key) => {
+  const auxPersons = listPersons.filter((item) => {
     for(let i=0;i<listTemperatures.length;i++)
     {
       
@@ -112,7 +112,7 @@ const AddTemperaturesRequest = async (data) =>{
     const response=await requestHttp('post',endpoint,data)
     if(response.status===201)
     {
-      const auxListPersons = listPersons.filter((item,key) => (
+      const auxListPersons = listPersons.filter((item) => (
         item._id !== data.person))
        
       setListPersons(auxListPersons)

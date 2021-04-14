@@ -37,7 +37,7 @@ export default function ListPlaces({fromSiteList}) {
           <div className={classes.demo}>
             <List dense='false'>
               {fromSiteList.map((item,key)=>
-                <ListItem>
+                <ListItem key ={key}>
                   <ListItemAvatar>
                     <Avatar>
                       <HomeWork />

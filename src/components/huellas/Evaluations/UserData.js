@@ -13,7 +13,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const useStyles = makeStyles((styles) => ({
+const useStyles = makeStyles(() => ({
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
     margin: "0",

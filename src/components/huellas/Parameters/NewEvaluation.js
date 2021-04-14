@@ -29,7 +29,7 @@ const styles = (theme) => ({
   },
 });
 
-const NewEvaluation=(props)=> {
+const NewEvaluation=()=> {
    
   const [Steps, setSteps] =useState('')
 
@@ -84,7 +84,7 @@ const NewEvaluation=(props)=> {
                         <AddEvaluationIcon />
                     </IconButton>
                     </GridItem>
-                    {bandera ? stepsList.map((item,key)=>
+                    {bandera ? stepsList.map((item)=>
                     <>
                     <NewStep Step={item}/>
                     </>): <>

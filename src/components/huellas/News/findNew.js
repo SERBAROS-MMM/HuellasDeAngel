@@ -185,9 +185,9 @@ const getFilterPersons=async()=>{
     const auxExport = []
 
     if (novedades.length>0){
-      novedades.map((item,key) =>{
+      novedades.map((item) =>{
         let listNiño=""
-        item.persons.map((person,key) =>{
+        item.persons.map((person) =>{
           listNiño += " - " + person.name + " " + person.lastName1 + " " + person.lastName2
         })
 
@@ -239,7 +239,7 @@ const getFilterPersons=async()=>{
                             onChange={(e) => setSearchBy(e.target.value)}
                             fullWidth                           
                           >
-                          {buscarPor.map((item,key) => (
+                          {buscarPor.map((item) => (
                            <MenuItem key={item._id} value={item}>
                                 {item}
                            </MenuItem>
@@ -247,7 +247,7 @@ const getFilterPersons=async()=>{
                           </TextField>
                           </GridItem>
             {
-          aux.map((item,key) => {
+          aux.map(() => {
             switch (searchBy) {
                 case 'Niño':return(
                     <>
@@ -260,7 +260,7 @@ const getFilterPersons=async()=>{
                         onChange={(e)=>setBoy(e.target.value)}
                         helperText="Por favor seleccione un niño"
                         >
-                        {persons.map((item,key) => (
+                        {persons.map((item) => (
                             <MenuItem key={item._id} value={item}>
                             {item.name + " " + item.lastName1 + " " + item.lastName2}
                             </MenuItem>
@@ -321,12 +321,12 @@ const getFilterPersons=async()=>{
      <GridContainer>
      {
     novedades.map((item,key) =>(
-                <Card>
+                <Card key={key}>
                 <CardHeader color="primary">
                 <h4 className={classes.cardTitleWhite}>
                   {
                   searchBy === "Fecha" ?
-                  item.persons.map((person,key) =>(                            
+                  item.persons.map((person) =>(                            
                     " - " + person.name + " " + person.lastName1 + " " + person.lastName2
                   )):
                   item.day.substr(0,10)

@@ -1,13 +1,14 @@
 import React from "react";
 
 import Indicadores from "components/huellas/Home/Indicadores.js"
-import Buscar from "components/huellas/Home/Buscar.js"
+import GraphCircular from "components/huellas/Home/GraphCircular";
+
 
 const HomePage = () => {
   return (
       <div>
         <Indicadores/>
-        <Buscar/>
+        <GraphCircular/>
       </div>
     
       );

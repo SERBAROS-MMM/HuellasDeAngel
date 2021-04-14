@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import GridPerson from './GridPerson.js';
 
 
-const styles = (theme) => ({
+const styles = () => ({
     contentWrapper: {
       margin: '0px',
     },

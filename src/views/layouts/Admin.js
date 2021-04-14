@@ -79,7 +79,7 @@ export default function Admin({ ...rest }) {
   useEffect(() => {
     autologin()
     return () => {}
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, [])
 
   const handleDrawerToggle = () => {

@@ -183,14 +183,14 @@ export default function EvaluationsPage({location={state:(JSON.parse("{\"ident\"
           aria-label="scrollable auto tabs example"
         >
        { evaluationsResult.map((item,key)=>
-          <Tab label= {item.nameEvaluation} {...a11yProps(key)} />
+          <Tab label= {item.nameEvaluation} {...a11yProps(key)} key={key}/>
           )
           }
         </Tabs>
       </AppBar>
       { 
           evaluationsResult.map((item,key)=>
-          <TabPanel value={value} index={key}>
+          <TabPanel value={value} index={key} key={key}>
             <TabEvaluation Steps = {item.Steps}/>
           </TabPanel> 
           )

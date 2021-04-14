@@ -10,13 +10,14 @@ import Update from "@material-ui/icons/Update"
 import Accessibility from "@material-ui/icons/Accessibility"
 
 // core components
-import GridItem from "components/dashboard/Grid/GridItem.js"
-import GridContainer from "components/dashboard/Grid/GridContainer.js"
+
 import Card from "components/dashboard/Card/Card.js"
 import CardHeader from "components/dashboard/Card/CardHeader.js"
 import CardIcon from "components/dashboard/Card/CardIcon.js"
 import CardFooter from "components/dashboard/Card/CardFooter.js"
-
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 import {HTTP_CONSTANTS} from '../../../config/http-constants'
 import {requestHttp} from '../../../config/http-server'
@@ -24,6 +25,44 @@ import {requestHttp} from '../../../config/http-server'
 import IndicadorFromSite from './IndicadorFromSite'
 
 const useStyles = makeStyles(styles)
+
+const config = {
+  arrows: false,
+  dots: false,
+  infinite: true,
+  //autoplay: true,
+  speed: 1500,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  //initialSlide: 0,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: false,
+        dots: false
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        //initialSlide: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+  };
+
 
 const Indicadores = () => {
   const classes = useStyles()
@@ -66,9 +105,7 @@ const Indicadores = () => {
 
 
   return (
-    <div>
-      <GridContainer>
-        <GridItem xs={12} sm={6} md={3}>
+    <Slider {...config} >
           <Card>
             <CardHeader color="primary" stats icon>
               <CardIcon color="primary">
@@ -84,13 +121,12 @@ const Indicadores = () => {
               </div>
             </CardFooter>
           </Card>
-        </GridItem>
+       
         {fromSitesList.map((item,key)=> 
           <IndicadorFromSite fromSite = {item}  key = {key} />
         )
         }
-      </GridContainer>
-    </div>
+        </Slider>
   )
 }
 

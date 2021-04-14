@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import imageCompression from 'browser-image-compression'
 
-const useStyles = makeStyles((styles) => ({
+const useStyles = makeStyles(() => ({
     input: {
         display: 'none'
     }

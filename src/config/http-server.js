@@ -16,7 +16,7 @@ export const requestHttp=async(
     requestData={},
     params={}
 )=>{
-    try {
+    //try {
         const url=HTTP_CONSTANTS.url+endPoint
         const options={
             method,
@@ -29,9 +29,9 @@ export const requestHttp=async(
         const response=await axios(options)
         const {data}=response
         return data
-    } catch (error) {
-        throw error
-    }
+    //} catch (error) {
+     //   throw error
+    //}
 }
 
 export const requestHttpFile=async(
@@ -39,7 +39,7 @@ export const requestHttpFile=async(
     endPoint,
     requestData={}
 )=>{
-    try {
+    //try {
         const url=HTTP_CONSTANTS.urlUp+endPoint
         const options={
             method,
@@ -50,7 +50,7 @@ export const requestHttpFile=async(
         const response=await axios(options)
         const {data}=response
         return data
-    } catch (error) {
-        throw error
-    }
+    //} catch (error) {
+      //  throw error
+   // }
 }

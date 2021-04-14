@@ -33,7 +33,7 @@ const switchRoutes = (
 
 //const useStyles = makeStyles(styles);
 
-export default function Auth({ ...rest }) {
+export default function Auth() {
   // styles
   //const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices

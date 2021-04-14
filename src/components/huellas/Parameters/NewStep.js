@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import CardBody from "components/huellas/Person/CardBody.js";
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles((styles) => ({
+const useStyles = makeStyles(() => ({
   cardTitleWhite: {
     color: "#FFFFFF",
     marginTop: "0px",
@@ -88,7 +88,7 @@ export default function NewStep ({Step})  {
                           </IconButton>
                           </GridItem>
                           </GridContainer>
-                          {bandera ? fieldsList.map((item,key)=>
+                          {bandera ? fieldsList.map((item)=>
                             <>
                             <NewField Field={item}/>
                             </>): <>                                                      

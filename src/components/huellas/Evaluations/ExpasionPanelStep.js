@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ExpasionPanelStep({Fields = []}) {
+const ExpasionPanelStep = ({Fields = []}) => {
   const classes = useStyles();
 
   return (
@@ -31,7 +31,7 @@ export default function ExpasionPanelStep({Fields = []}) {
           Fields.map((item,key) => {              
             switch (item.typeField) {
               case 'Text': return(
-                <TextField
+                <TextField key={key}
                   label={item.nameField}
                   id={item.nameField}
                   fullWidth
@@ -75,3 +75,5 @@ export default function ExpasionPanelStep({Fields = []}) {
     </div>
   );
 }
+
+export default ExpasionPanelStep
